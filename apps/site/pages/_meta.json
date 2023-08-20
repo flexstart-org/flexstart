@@ -1,0 +1,78 @@
+{
+  "index": {
+    "type": "page",
+    "title": "Home",
+    "theme": {
+      "layout": "raw"
+    }
+  },
+  "pricing": {
+    "type": "page",
+    "title": "Pricing",
+    "href": "/pricing",
+    "theme": {
+      "layout": "raw"
+    }
+  },
+  "docs": {
+    "type": "page",
+    "title": "Docs",
+    "display": "hidden"
+  },
+  "company": {
+    "title": "Company",
+    "type": "menu",
+    "items": {
+      "about": {
+        "title": "About",
+        "href": "/about"
+      },
+      "contact": {
+        "title": "Contact Us",
+        "href": "/contact"
+      }
+    }
+  },
+  "blog": {
+    "type": "page",
+    "title": "Blog",
+    "display": "hidden"
+  },
+  "courses": {
+    "type": "page",
+    "title": "Courses",
+    "display": "hidden"
+  },
+  "about": {
+    "type": "page",
+    "title": "About Us",
+    "display": "hidden",
+    "theme": {
+      "typesetting": "article"
+    }
+  },
+  "contact": {
+    "type": "page",
+    "title": "Contact Us",
+    "display": "hidden",
+    "theme": {
+      "typesetting": "article"
+    }
+  },
+  "privacy": {
+    "type": "page",
+    "title": "Privacy",
+    "display": "hidden",
+    "theme": {
+      "typesetting": "article"
+    }
+  },
+  "terms": {
+    "type": "page",
+    "title": "Terms",
+    "display": "hidden",
+    "theme": {
+      "typesetting": "article"
+    }
+  }
+}

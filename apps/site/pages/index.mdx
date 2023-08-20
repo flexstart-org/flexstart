@@ -1,0 +1,49 @@
+---
+title: Flexstart – Serverless Kubernetes platform
+---
+
+import Link from "next/link";
+import Hero from "@/components/home/hero";
+import Logos from "@/components/home/logos";
+import Features from "@/components/home/features";
+import Testimonials from "@/components/home/testimonials";
+import Pricing from "@/components/home/pricing";
+import Background from "@/components/shared/background";
+
+export default function Home() {
+  const stats = [
+    { id: 1, name: "Users", value: "4,600" },
+    { id: 2, name: "No. of Pods running", value: "39,212" },
+    { id: 3, name: "Projects", value: "18,600" },
+  ];
+
+  return (
+    <>
+      <div className="z-10">
+        <Hero />
+        <Logos />
+        <Features />
+        <div className="bg-white pb-24 sm:pb-32">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+              {stats.map((stat) => (
+                <div
+                  key={stat.id}
+                  className="mx-auto flex max-w-xs flex-col gap-y-4"
+                >
+                  <dt className="text-base leading-7 text-gray-600">
+                    {stat.name}
+                  </dt>
+                  <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+        {/* <Testimonials /> */}
+      </div>
+    </>
+  );
+}
