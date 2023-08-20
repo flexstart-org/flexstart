@@ -1,0 +1,42 @@
+# Data Types in Javascript
+
+In **JavaScript**, data types are classifications that define the kind of values that can be assigned to variables. JavaScript has several built-in data types, each with its own characteristics and purpose. Understanding these data types is essential for effective programming. Here are the main data types in JavaScript:
+
+## 1. Primitive Data Types
+
+- **Number:** Represents numeric values, both integers and floating-point numbers. For example: `42`, `3.14`.
+- **String:** Represents textual data enclosed in single or double quotes. For example: `'Hello'`, `"World"`.
+- **Boolean:** Represents logical values `true` or `false`, often used for conditional expressions and control flow. For example: `true`, `false`.
+- **Undefined:** Represents an uninitialized or unassigned value. Variables that are declared but not assigned a value have the type `undefined`.
+- **Null:** Represents the intentional absence of any object value. It is often assigned explicitly to indicate no value. For example: `null`.
+- **Symbol:** Represents unique and immutable values that may be used as the key of an object property. Symbols are commonly used to define unique identifiers. Introduced in ECMAScript 6 (ES6).
+
+## 2. Composite Data Types
+
+- **Object:** Represents a collection of key-value pairs, where values can be of any type (including other objects). Objects can be created using object literals `({})` or the `new` keyword. They are dynamic and can have properties and methods. For example: `{ name: 'John', age: 25 }`.
+- **Array:** Represents an ordered list of values, often of the same type. Arrays are zero-indexed, and elements can be accessed using their index. They can grow or shrink dynamically. For example: `[1, 2, 3, 4]`.
+- **Function:** Represents a reusable block of code that can be invoked with specified arguments. Functions are objects in JavaScript and can be assigned to variables, passed as arguments, and returned from other functions.
+
+## 3. Special Data Types
+
+- **BigInt:** Represents integers with arbitrary precision. It is useful when working with extremely large numbers that exceed the maximum value allowed by the `Number` type. BigInts are created by appending `n` to the end of an integer literal or by using the `BigInt()` constructor. For example: `10n`, `BigInt("9007199254740993")`.
+- **Symbol:** As mentioned earlier, symbols represent unique identifiers and are primarily used as keys in object properties.
+
+**JavaScript** is a dynamically typed language, meaning that variables are not bound to a specific data type. The data type is determined automatically based on the value assigned to the variable. JavaScript also supports type coercion, which means that values of one type can be converted implicitly or explicitly to another type.
+
+To check the type of a value, you can use the **`typeof`** operator. For example:
+
+```js filename="javascript"
+typeof 42;            // "number"
+typeof "Hello";       // "string"
+typeof true;          // "boolean"
+typeof undefined;     // "undefined"
+typeof null;          // "object" (an unfortunate quirk in JavaScript)
+typeof Symbol();      // "symbol"
+typeof {};            // "object"
+typeof [];            // "object"
+typeof function(){};  // "function"
+typeof 10n;           // "bigint"
+```
+
+It's important to be aware of the different data types in JavaScript and how they behave, as it impacts variable assignment, operations, and behavior in various programming scenarios.

@@ -1,0 +1,70 @@
+# `<Image>`
+
+This API reference will help you understand how to use props and configuration options available for the Image Component. For features and usage, please see the Image Component page.
+
+```js filename="app/page.js" showLineNumbers
+import Image from 'next/image'
+ 
+export default function Page() {
+  return (
+    <Image
+      src="/profile.png"
+      width={500}
+      height={500}
+      alt="Picture of the author"
+    />
+  )
+}
+```
+
+## Required Props
+
+The Image Component requires the following properties: `src`, `width`, `height`, and `alt`.
+
+```js filename="app/page.js" showLineNumbers
+import Image from 'next/image'
+ 
+export default function Page() {
+  return (
+    <div>
+      <Image
+        src="/profile.png"
+        width={500}
+        height={500}
+        alt="Picture of the author"
+      />
+    </div>
+  )
+}
+```
+
+### `src`
+
+Must be one of the following:
+- A statically imported image file
+- A path string. This can be either an absolute external URL, or an internal path depending on the loader prop.
+
+When using an external URL, you must add it to remotePatterns in `next.config.js`.
+
+
+### `width`
+
+The `width` property represents the rendered width in pixels, so it will affect how large the image appears.
+
+Required, except for statically imported images or images with the `fill` property.
+
+
+### `height`
+
+The `height` property represents the rendered height in pixels, so it will affect how large the image appears.
+
+Required, except for statically imported images or images with the `fill` property.
+
+
+### `alt`
+
+The `alt` property is used to describe the image for screen readers and search engines. It is also the fallback text if images have been disabled or an error occurs while loading the image.
+
+It should contain text that could replace the image without changing the meaning of the page. It is not meant to supplement the image and should not repeat information that is already provided in the captions above or below the image.
+
+If the image is purely decorative or not intended for the user, the `alt` property should be an empty string (`alt=""`).

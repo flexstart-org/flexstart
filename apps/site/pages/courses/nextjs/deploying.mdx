@@ -1,0 +1,59 @@
+import { FileTree } from "nextra/components";
+
+# Deploying
+
+This page will show how to deploy Next.js application either managed or self-hosted.
+
+## Self-Hosting
+
+You can self-host Next.js with support for all features using Node.js or Docker. You can also do a Static HTML Export, which [has some limitations](/courses/nextjs/deploying/static-exports).
+
+### Node.js Server
+
+Next.js can be deployed to any hosting provider that supports Node.js.
+
+First, ensure your `package.json` has the `"build"` and `"start"` scripts:
+
+```json filename="package.json" showLineNumbers
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}
+```
+
+Then, run `npm run build` to build your application. Finally, run `npm run start` to start the Node.js server. This server supports all features of Next.js.
+
+<FileTree>
+  If you are using `next/image`, consider adding `sharp` for more performant
+  Image Optimization in your production environment by running `npm install sharp`
+  in your project directory. On Linux platforms, `sharp` may require [additional
+  configuration](https://sharp.pixelplumbing.com/install#linux-memory-allocator)
+  to prevent excessive memory usage.
+</FileTree>
+
+### Docker Image
+
+Next.js can be deployed to any hosting provider that supports Docker containers. You can use this approach when deploying to container orchestrators such as Kubernetes in any cloud provider. For example, [Flexstart.org](https://flexstart.org).
+
+1. Install Docker on your machine
+
+2. Clone the [with-docker](https://github.com/vercel/next.js/tree/canary/examples/with-docker) example
+
+3. Build your container: docker build -t nextjs-docker .
+
+4. Run your container: docker run -p 3000:3000 nextjs-docker
+
+If you need to use different Environment Variables across multiple environments, check out [with-docker-multi-env](https://github.com/vercel/next.js/tree/canary/examples/with-docker-multi-env) example.
+
+### Static HTML Export
+
+If you’d like to do a static HTML export of your Next.js app, follow the directions on our [Static HTML Export documentation](/courses/nextjs/deploying/static-exports).
+
+
+
+
+
+

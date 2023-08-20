@@ -1,0 +1,114 @@
+import { FileTree } from "nextra/components";
+
+# Data Fetching, Caching, and Revalidating
+
+Data fetching is a core part of any application. This page goes through how you can fetch, cache, and revalidate data in React and Next.js.
+
+There are four ways you can fetch data:
+
+1. [On the server, with fetch](#fetching-data-on-the-server-with-fetch)
+
+2. [On the server, with third-party libraries]
+
+3. [On the client, via a Route Handler]
+
+4. [On the client, with third-party libraries].
+
+## Fetching Data on the Server with fetch
+
+Next.js extends the native [`fetch` Web API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to allow you to configure the caching and revalidating behavior for each fetch request on the server. React extends `fetch` to automatically memoize fetch requests while rendering a React component tree.
+
+You can use `fetch` with async/await in Server Components, in Route Handlers, and in Server Actions.
+
+For example:
+
+```tsx filename="app/page.tsx" showLineNumbers
+async function getData() {
+  const res = await fetch("https://api.example.com/...");
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+export default async function Page() {
+  const data = await getData();
+
+  return <main></main>;
+}
+```
+
+## Fetching data on the Server with third-party libraries
+
+In cases where you're using a third-party library that doesn't support or expose fetch (for example, a database, CMS, or ORM client), you can configure the caching and revalidating behavior of those requests using the Route Segment Config Option and React's `cache` function.
+
+Whether the data is cached or not will depend on whether the route segment is statically or dynamically rendered. If the segment is static (default), the output of the request will be cached and revalidated as part of the route segment. If the segment is dynamic, the output of the request will _not_ be cached and will be re-fetched on every request when the segment is rendered.
+
+### Example
+
+In the example below:
+
+- The revalidate option is set to 3600, meaning the data will be cached and revalidated at most every hour.
+
+- The React cache function is used to [memoize](/courses/nextjs/caching#request-memoization) data requests.
+
+```ts filename="utils/get-item.ts" showLineNumbers
+import { cache } from "react";
+
+export const revalidate = 3600; // revalidate the data at most every hour
+
+export const getItem = cache(async (id: string) => {
+  const item = await db.item.findUnique({ id });
+  return item;
+});
+```
+
+Although the `getItem` function is called twice, only one query will be made to the database.
+
+```tsx filename="app/item/layout.tsx" showLineNumbers
+import { getItem } from "@/utils/get-item";
+
+export default async function Layout({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  const item = await getItem(id);
+  // ...
+}
+```
+
+```tsx filename="app/item/[id]/page.tsx" showLineNumbers
+import { getItem } from "@/utils/get-item";
+
+export default async function Page({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  const item = await getItem(id);
+  // ...
+}
+```
+
+## Fetching Data on the Client with Route Handlers
+
+If you need to fetch data in a client component, you can call a [Route Handler](/courses/nextjs/routing/route-handlers) from the client. Route Handlers execute on the server and return the data to the client. This is useful when you don't want to expose sensitive information to the client, such as API tokens.
+
+See the [Route Handler](/courses/nextjs/routing/route-handlers) documentation for examples.
+
+<FileTree>
+**Server Components and Route Handlers**
+
+Since Server Components render on the server, you don't need to call a Route Handler from a Server Component to fetch data. Instead, you can fetch the data directly inside the Server Component.
+
+</FileTree>
+
+## Fetching Data on the Client with third-party libraries
+
+You can also fetch data on the client using a third-party library such as [SWR](https://swr.vercel.app/) or [React Query](https://tanstack.com/query/latest). These libraries provide their own APIs for memoizing requests, caching, revalidating, and mutating data.

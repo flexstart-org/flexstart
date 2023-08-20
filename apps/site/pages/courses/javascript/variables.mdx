@@ -1,0 +1,42 @@
+# Variables in Javascript
+
+In **JavaScript**, a variable is a named container that stores a value. Variables are used to store and manipulate data throughout a program. There are several ways to declare and initialize variables in JavaScript, including using the keywords **`const`**, **`let`**, and **`var`**.
+
+The var keyword was traditionally used to declare variables in JavaScript. However, the let and const keywords were introduced in ECMAScript 6 (ES6) and provide more precise control over variable scoping and immutability.
+
+**Here's an overview of each type of variable in JavaScript:**
+
+1. **`const`**: The const keyword declares a block-scoped constant variable. Variables declared with const cannot be reassigned a new value.
+
+For example:
+
+```js filename="javascript"
+const x = 1;
+x = 2; // Uncaught TypeError: Assignment to constant variable.
+```
+
+2. **`let`**: The let keyword declares a block-scoped variable. Variables declared with let are only accessible within the block in which they are declared. A block is any code between curly braces {}.
+
+For example:
+
+```js filename="javascript"
+if (true) {
+  let x = 1;
+  console.log(x); // 1
+}
+console.log(x); // Uncaught ReferenceError: x is not defined
+```
+
+3. **`var`**: The var keyword declares a variable in the current scope. Variables declared with var are function-scoped, meaning they are only accessible within the function in which they are declared or the global scope if they are declared outside of any function.
+
+For example:
+
+```js filename="javascript"
+function example() {
+  var x = 1;
+  console.log(x); // 1
+}
+console.log(x); // Uncaught ReferenceError: x is not defined
+```
+
+When declaring variables, it is important to follow best practices, such as using descriptive variable names, initializing variables with a value, and declaring variables in the smallest possible scope. Proper variable naming and scoping can make code easier to read, maintain, and debug.

@@ -1,0 +1,33 @@
+# What is Kubernetes ?
+
+Kubernetes is an open-source container orchestration platform designed to automate the deployment, scaling, and management of containerized applications. It was originally developed by Google and is now maintained by the Cloud Native Computing Foundation (CNCF).
+
+Containers are a lightweight and portable way to package and distribute applications along with their dependencies. Kubernetes provides a robust framework for managing containerized applications, allowing you to easily deploy, scale, and manage them across a cluster of machines.
+
+### Key features of Kubernetes include:
+
+#### 1. Orchestration
+
+Kubernetes automates the scheduling and deployment of containers, ensuring that the desired state of your applications is maintained. It manages the placement and movement of containers across the cluster, taking into account resource constraints and availability.
+
+#### 2. Scaling
+
+Kubernetes allows you to scale your applications by increasing or decreasing the number of running containers based on demand. It can automatically adjust the number of replicas to match the desired state, ensuring that your application can handle varying levels of traffic.
+
+#### 3. Service Discovery and Load Balancing
+
+Kubernetes provides a built-in service discovery mechanism, allowing containers to easily find and communicate with each other using DNS or environment variables. It also includes load balancing capabilities to distribute traffic across multiple containers.
+
+#### 4. Self-Healing
+
+Kubernetes monitors the health of containers and can automatically restart or replace failed containers to ensure the desired state is maintained. If a node in the cluster fails, Kubernetes can reschedule containers on other healthy nodes to maintain application availability.
+
+#### 5. Rolling Updates and Rollbacks
+
+Kubernetes supports rolling updates, allowing you to deploy new versions of your applications without downtime. It can gradually replace old containers with new ones, ensuring that your application remains available during the update process. In case of issues, Kubernetes supports rollbacks to the previous version.
+
+#### 6. Storage Orchestration
+
+Kubernetes provides a flexible storage system that can dynamically provision and manage storage resources for your applications. It supports various storage options, such as local disks, network-attached storage (NAS), or cloud-based storage.
+
+*"Kubernetes has become the de facto standard for container orchestration, offering a robust and scalable platform for managing containerized applications in production environments. It abstracts away the complexities of infrastructure management, allowing developers to focus on building and deploying their applications with ease."*

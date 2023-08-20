@@ -1,0 +1,83 @@
+# Next.js Project Structure
+
+This page provides an overview of the file and folder structure of a Next.js project. It covers top-level files and folders, configuration files, and routing conventions within the `app` and `pages` directories.
+
+---
+
+### Top-level folders
+
+| Folder Name |                                    |
+| :---------- | :--------------------------------: |
+| `app`       |             App Router             |
+| `pages`     |            Pages Router            |
+| `public`    |     Static assets to be served     |
+| `src`       | Optional application source folder |
+
+---
+
+### Top-level files
+
+| Next.js              |                                         |
+| :------------------- | :-------------------------------------: |
+| `next.config.js`     |     Configuration file for Next.js      |
+| `package.json`       |    Project dependencies and scripts     |
+| `instrumentation.ts` | OpenTelemetry and Instrumentation file  |
+| `middleware.ts`      |       Next.js request middleware        |
+| `.env`               |          Environment variables          |
+| `.env.local`         |       Local environment variables       |
+| `.env.production`    |    Production environment variables     |
+| `.env.development`   |    Development environment variables    |
+| `.eslintrc.json`     |      Configuration file for ESLint      |
+| `gitignore`          |     Git files and folders to ignore     |
+| `.next-env.d.ts`     | TypeScript declaration file for Next.js |
+| `tsconfig.json`      |    Configuration file for TypeScript    |
+| `jsconfig.json`      |    Configuration file for JavaScript    |
+| `postcss.config.js`  |   Configuration file for Tailwind CSS   |
+
+## `app` Routing Conventions
+
+### Routing Files
+
+| File Name      |               |                              |
+| :------------- | :-----------: | ---------------------------: |
+| `layout`       | `.js` `.jsx` `.tsx` |                       Layout |
+| `page`         | `.js` `.jsx` `.tsx` |                         Page |
+| `loading`      | `.js` .jsx `.tsx` |                   Loading UI |
+| `not-found`    | `.js` .jsx `.tsx` |                 Not found UI |
+| `error`        | `.js` `.jsx` .tsx |                     Error UI |
+| `global-error` | `.js` .jsx .tsx |              Global error UI |
+| `route`        |    .js .ts    |                 API endpoint |
+| `template`     | .js .jsx .tsx |           Re-rendered layout |
+| `default`      | .js .jsx .tsx | Parallel route fallback page |
+
+### Nested Routes
+
+| Folder          |                      |
+| :-------------- | :------------------: |
+| `folder`        |    Route segment     |
+| `folder/folder` | Nested route segment |
+
+### Dynamic Routes
+
+| Folder          |                                  |
+| :-------------- | :------------------------------: |
+| `[folder]`      |      Dynamic route segment       |
+| `[...folder]`   |     Catch-all route segment      |
+| `[[...folder]]` | Optional catch-all route segment |
+
+### Route Groups and Private Folders
+
+| Folder     |                                                  |
+| :--------- | :----------------------------------------------: |
+| `(folder)` |      Group routes without affecting routing      |
+| `_folder`  | Opt folder and all child segments out of routing |
+
+### Parallel and Intercepted Routes
+
+| Folder           |                            |
+| :--------------- | :------------------------: |
+| `[@folder]`      |         Named slot         |
+| `(.)folder`      |    Intercept same level    |
+| `(..)folder`     | Intercept one level above  |
+| `(..)(..)folder` | Intercept two levels above |
+| `(...)folder`    |    Intercept from root     |

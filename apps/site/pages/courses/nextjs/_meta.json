@@ -1,0 +1,35 @@
+{
+  "index": {
+    "title": "Overview"
+  },
+  "-- getting-started": {
+    "type": "separator",
+    "title": "Getting Started"
+  },
+  "installation": "",
+  "project-structure": "",
+  "-- building-your-application": {
+    "type": "separator",
+    "title": "Building Your Application"
+  },
+  "routing": "",
+  "data-fetching": "",
+  "rendering": "",
+  "caching": "",
+  "styling": "",
+  "optimizing": "",
+  "configuring": "",
+  "deploying": "",
+  "upgrading": "",
+  "-- api-reference": {
+    "type": "separator",
+    "title": "Api Reference"
+  },
+  "components": "",
+  "file-conventions": "",
+  "functions": "",
+  "next-config-js": "next.config.js Options",
+  "create-next-app": "create-next-app",
+  "edge-runtime": "",
+  "nextjs-cli": "Next.js CLI"
+}

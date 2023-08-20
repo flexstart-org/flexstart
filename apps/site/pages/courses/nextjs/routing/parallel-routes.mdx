@@ -1,0 +1,216 @@
+import { FileTree } from "nextra/components";
+
+# Parallel Routes
+
+Parallel Routing allows you to simultaneously or conditionally render one or more pages in the same layout. For highly dynamic sections of an app, such as dashboards and feeds on social sites, Parallel Routing can be used to implement complex routing patterns.
+
+For example, you can simultaneously render the team and analytics pages.
+
+Parallel Routing allows you to define independent error and loading states for each route as they're being streamed in independently.
+
+Parallel Routing also allows you to conditionally render a slot based on certain conditions, such as authentication state. This enables fully separated code on the same URL.
+
+## Convention
+
+Parallel routes are created using named **slots**. Slots are defined with the `@folder` convention, and are passed to the same-level layout as props.
+
+<FileTree>
+  Slots are not route segments and do not affect the URL structure. The file
+  path `/@team/members` would be accessible at `/members`.
+</FileTree>
+
+For example, the following file structure defines two explicit slots: `@analytics` and `@team`.
+
+<FileTree>
+  <FileTree.Folder name="app" defaultOpen>
+    <FileTree.Folder name="@analytics" defaultOpen>
+      <FileTree.File name="page.js" />
+    </FileTree.Folder>
+    <FileTree.Folder name="@team" defaultOpen>
+      <FileTree.File name="page.js" />
+    </FileTree.Folder>
+    <FileTree.File name="layout.js" />
+    <FileTree.File name="page.js" />
+  </FileTree.Folder>
+</FileTree>
+
+The folder structure above means that the component in `app/layout.js` now accepts the `@analytics` and `@team` slots props, and can render them in parallel alongside the `children` prop:
+
+```tsx filename="app/layout.tsx" showLineNumbers
+export default function Layout(props: {
+  children: React.ReactNode;
+  analytics: React.ReactNode;
+  team: React.ReactNode;
+}) {
+  return (
+    <>
+      {props.children}
+      {props.team}
+      {props.analytics}
+    </>
+  );
+}
+```
+
+<FileTree>
+  Good to know: The `children` prop is an implicit slot that does not need to be
+  mapped to a folder. This means `app/page.js` is equivalent to
+  `app/@children/page.js`.
+</FileTree>
+
+## Unmatched Routes
+
+By default, the content rendered within a slot will match the current URL.
+
+In the case of an unmatched slot, the content that Next.js renders differs based on the routing technique and folder structure.
+
+### `default.js`
+
+You can define a `default.js` file to render as a fallback when Next.js cannot recover a slot's active state based on the current URL.
+
+Consider the following folder structure. The `@team` slot has a `settings` directory, but `@analytics` does not.
+
+<FileTree>
+  <FileTree.Folder name="app" defaultOpen>
+    <FileTree.Folder name="@team" defaultOpen>
+      <FileTree.Folder name="settings" defaultOpen>
+        <FileTree.File name="page.js" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+    <FileTree.Folder name="@analytics" defaultOpen>
+      <FileTree.File name="default.js" />
+      <FileTree.File name="page.js" />
+    </FileTree.Folder>
+    <FileTree.File name="default.js" />
+    <FileTree.File name="layout.js" />
+    <FileTree.File name="page.js" />
+  </FileTree.Folder>
+</FileTree>
+
+If you were to navigate from the root `/` to `/settings`, the content that gets rendered is different based on the type of navigation and the availability of the `default.js` file.
+
+#### Soft Navigation
+
+On a soft navigation - Next.js will render the slot's previously active state, even if it doesn't match the current URL.
+
+#### Hard Navigation
+
+On a hard navigation - a navigation that requires a full page reload - Next.js will first try to render the unmatched slot's `default.js` file. If that's not available, a 404 gets rendered.
+
+<FileTree>
+  The 404 for unmatched routes helps ensure that you don't accidentally render a
+  route that shouldn't be parallel rendered.
+</FileTree>
+
+## `useSelectedLayoutSegment(s)`
+
+Both `useSelectedLayoutSegment` and `useSelectedLayoutSegments` accept a `parallelRoutesKey`, which allows you read the active route segment within that slot.
+
+```tsx filename="app/layout.tsx" showLineNumbers
+"use client";
+
+import { useSelectedLayoutSegment } from "next/navigation";
+
+export default async function Layout(props: {
+  //...
+  authModal: React.ReactNode;
+}) {
+  const loginSegments = useSelectedLayoutSegment("authModal");
+  // ...
+}
+```
+
+When a user navigates to `@authModal/login`, or `/login` in the URL bar, `loginSegments` will be equal to the string `"login"`.
+
+## Examples
+
+### Modals
+
+Parallel Routing can be used to render modals.
+
+The `@authModal` slot renders a `<Modal>` component that can be shown by navigating to a matching route, for example `/login`.
+
+```tsx filename="app/layout.tsx" showLineNumbers
+export default async function Layout(props: {
+  // ...
+  authModal: React.ReactNode;
+}) {
+  return (
+    <>
+      {/* ... */}
+      {props.authModal}
+    </>
+  );
+}
+```
+
+```tsx filename="app/@authModal/login/page.tsx" showLineNumbers
+import { Modal } from "components/modal";
+
+export default function Login() {
+  return (
+    <Modal>
+      <h1>Login</h1>
+      {/* ... */}
+    </Modal>
+  );
+}
+```
+
+To ensure that the contents of the modal don't get rendered when it's not active, you can create a `default.js` file that returns `null`.
+
+```tsx filename="app/@authModal/default.tsx" showLineNumbers
+export default function Default() {
+  return null;
+}
+```
+
+#### Dismissing a modal
+
+If a modal was initiated through client navigation, e.g. by using `<Link href="/login">`, you can dismiss the modal by calling `router.back()` or by using a `Link` component.
+
+```tsx filename="app/@authModal/login/page.tsx" showLineNumbers
+"use client";
+import { useRouter } from "next/navigation";
+import { Modal } from "components/modal";
+
+export default async function Login() {
+  const router = useRouter();
+  return (
+    <Modal>
+      <span onClick={() => router.back()}>Close modal</span>
+      <h1>Login</h1>
+      ...
+    </Modal>
+  );
+}
+```
+
+If you want to navigate elsewhere and dismiss a modal, you can also use a catch-all route.
+
+```tsx filename="app/@authModal/[...catchAll]/page.tsx" showLineNumbers
+export default function CatchAll() {
+  return null;
+}
+```
+
+<FileTree>Catch-all routes take precedence over `default.js`.</FileTree>
+
+### Conditional Routes
+
+Parallel Routes can be used to implement conditional routing. For example, you can render a `@dashboard` or `@login` route depending on the authentication state.
+
+```tsx filename="app/layout.tsx" showLineNumbers
+import { getUser } from "@/lib/auth";
+
+export default function Layout({
+  dashboard,
+  login,
+}: {
+  dashboard: React.ReactNode;
+  login: React.ReactNode;
+}) {
+  const isLoggedIn = getUser();
+  return isLoggedIn ? dashboard : login;
+}
+```
