@@ -12,9 +12,25 @@ const withNextra = nextra({
   readingTime: true,
 });
 
-export default withNextra({
+const nextConfig = withNextra({
   reactStrictMode: true,
   images: {
     domains: ["pbs.twimg.com"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/login",
+        destination: "https://dash.flexstart.org/login",
+        permanent: false,
+      },
+      {
+        source: "/signup",
+        destination: "https://dash.flexstart.org/signup",
+        permanent: false,
+      },
+    ];
+  },
 });
+
+export default nextConfig;

@@ -79,8 +79,7 @@ const pricingItems = [
       { text: "Advanced Support" },
     ],
     cta: "Contact us",
-    ctaLink:
-      "https://flexstart.org/contact",
+    ctaLink: "https://flexstart.org/contact",
   },
 ];
 
