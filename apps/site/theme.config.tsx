@@ -130,12 +130,12 @@ const config: DocsThemeConfig = {
     return (
       <>
         <div className="w-full h-24 relative overflow-hidden">
-          <div className="w-full !h-56 absolute">
+          <div className="w-full !h-24 absolute">
             <Adsense />
           </div>
         </div>
         {children}
-        <div className="overflow-hidden">
+        <div className="h-32 overflow-hidden">
           <Adsense />
           {/* <Adsense data-ad-format="autorelaxed" data-ad-slot="3683525643" /> */}
         </div>
