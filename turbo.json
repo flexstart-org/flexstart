@@ -6,6 +6,16 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
+    "site#build": {
+      "dependsOn": ["^build"],
+      "env": [
+        "EMAIL_SERVER",
+        "SMTP_USER",
+        "SMTP_PASSWORD",
+        "TWITTER_AUTH_TOKEN"
+      ],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
     "lint": {},
     "check-types": {},
     "dev": {

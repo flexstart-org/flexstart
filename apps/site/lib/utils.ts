@@ -1,6 +1,6 @@
 import { NextRouter } from "next/router";
-import ms from "ms";
-import { customAlphabet } from "nanoid";
+// import ms from "ms";
+// import { customAlphabet } from "nanoid";
 import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
 
@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 7); // 7-character random string
+// export const nanoid = customAlphabet("0123456789abcdefghijklmnopqrstuvwxyz", 7); // 7-character random string
 
 interface SWRError extends Error {
   status: number;
@@ -83,12 +83,12 @@ export function linkConstructor({
   return pretty ? link.replace(/^https?:\/\//, "") : link;
 }
 
-export const timeAgo = (timestamp: Date, timeOnly?: boolean): string => {
-  if (!timestamp) return "never";
-  return `${ms(Date.now() - new Date(timestamp).getTime())}${
-    timeOnly ? "" : " ago"
-  }`;
-};
+// export const timeAgo = (timestamp: Date, timeOnly?: boolean): string => {
+//   if (!timestamp) return "never";
+//   return `${ms(Date.now() - new Date(timestamp).getTime())}${
+//     timeOnly ? "" : " ago"
+//   }`;
+// };
 
 export const getDateTimeLocal = (timestamp?: Date): string => {
   const d = timestamp ? new Date(timestamp) : new Date();
@@ -229,34 +229,34 @@ export const getUrlWithoutUTMParams = (url: string) => {
   }
 };
 
-const logTypeToEnv = {
-  cron: process.env.FLEXSTART_SLACK_HOOK_CRON,
-  links: process.env.FLEXSTART_SLACK_HOOK_LINKS,
-};
+// const logTypeToEnv = {
+//   cron: process.env.FLEXSTART_SLACK_HOOK_CRON,
+//   links: process.env.FLEXSTART_SLACK_HOOK_LINKS,
+// };
 
-export const log = async (message: string, type: "cron" | "links") => {
-  /* Log a message to the console */
-  const HOOK = logTypeToEnv[type];
-  if (!HOOK) return;
-  try {
-    return await fetch(HOOK, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        blocks: [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: message,
-            },
-          },
-        ],
-      }),
-    });
-  } catch (e) {
-    console.log(`Failed to log to Flexstart Slack. Error: ${e}`);
-  }
-};
+// export const log = async (message: string, type: "cron" | "links") => {
+//   /* Log a message to the console */
+//   const HOOK = logTypeToEnv[type];
+//   if (!HOOK) return;
+//   try {
+//     return await fetch(HOOK, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         blocks: [
+//           {
+//             type: "section",
+//             text: {
+//               type: "mrkdwn",
+//               text: message,
+//             },
+//           },
+//         ],
+//       }),
+//     });
+//   } catch (e) {
+//     console.log(`Failed to log to Flexstart Slack. Error: ${e}`);
+//   }
+// };
