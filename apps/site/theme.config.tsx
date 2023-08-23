@@ -43,7 +43,7 @@ const config: DocsThemeConfig = {
       };
     }
   },
-  head: () => {
+  head: function Head() {
     const { title } = useConfig();
     const pathname = usePathname();
     const url = `https://flexstart.org${pathname}`;

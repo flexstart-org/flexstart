@@ -56,7 +56,7 @@ export default function CountingNumbers({
         }
       }, interval);
     }
-  }, [isInView]);
+  }, [isInView, interval, increment, reverse, number, value]);
 
   return (
     <p className={className} ref={ref}>
