@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  flexstart:
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
+    image: flexstart/flexstart:latest
+    ports:
+      - '80:3000'

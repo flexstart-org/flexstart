@@ -6,6 +6,24 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
+    "dashboard#build": {
+      "dependsOn": ["^build"],
+      "env": [
+        "NEXTAUTH_URL",
+        "NEXTAUTH_SECRET",
+        "DATABASE_URL",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET",
+        "EDGE_CONFIG",
+        "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+        "STRIPE_SECRET_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "EMAIL_SERVER",
+        "SMTP_USER",
+        "SMTP_PASSWORD"
+      ],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
     "site#build": {
       "dependsOn": ["^build"],
       "env": [

@@ -1,0 +1,66 @@
+"use client"
+
+import {
+  AlertCircleFill,
+  CheckCircleFill,
+  ExternalLink,
+  LoadingCircle,
+  LoadingDots,
+  XCircleFill,
+} from "@/components/shared/icons";
+import useProject from "@/lib/swr/use-project";
+import { useEditDomainModal } from "../../modals/edit-domain-modal";
+import DomainConfiguration from "./domain-configuration";
+
+export default function CustomDomain() {
+  const { project: { domain } = {} } = useProject();
+  const { setShowEditDomainModal, EditDomainModal } = useEditDomainModal();
+
+  return (
+    <div className="max-w-full rounded-lg border border-gray-200 bg-white py-5 sm:py-10">
+      {domain && <EditDomainModal />}
+      <div className="flex flex-col space-y-3 px-3 lg:px-10">
+        <h2 className="text-xl font-medium">Custom Domain</h2>
+        <p className="text-sm text-gray-500">
+          This is the custom domain associated with your project.
+        </p>
+      </div>
+      <div className="my-4 border-b border-gray-200 sm:my-8" />
+      <div className="flex flex-col space-y-3 px-3 lg:px-10">
+        <div className="flex justify-between space-y-4 sm:space-x-4">
+          {domain ? (
+            <a
+              href={`https://${domain}`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center space-x-2"
+            >
+              <p className="flex items-center text-xl font-semibold">
+                {domain}
+              </p>
+              <ExternalLink className="h-5 w-5" />
+            </a>
+          ) : (
+            <div className="h-8 w-32 animate-pulse rounded-md bg-gray-200" />
+          )}
+          <div className="flex space-x-3">
+            {domain ? (
+              <button
+                onClick={() => setShowEditDomainModal(true)}
+                className="h-9 w-20 rounded-md border border-solid border-black bg-black text-sm text-white transition-all duration-150 ease-in-out hover:bg-white hover:text-black focus:outline-none"
+              >
+                Edit
+              </button>
+            ) : (
+              <div className="h-9 w-24 animate-pulse rounded-md bg-gray-200" />
+            )}
+          </div>
+        </div>
+
+        {!domain?.endsWith("flexstart.org") && (
+          <DomainConfiguration domain={domain} />
+        )}
+      </div>
+    </div>
+  );
+}
