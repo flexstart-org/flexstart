@@ -1,0 +1,122 @@
+import { Callout, FileTree } from "nextra/components";
+
+# Install Ubuntu desktop 23.04
+
+## Overview
+
+This page will guide you through the steps required to install Ubuntu Desktop on your laptop or PC.
+
+**Pre-requisites**
+
+- A laptop or PC (obviously!) with at least 25GB of storage space.
+
+- A flash drive (8GB minimum, 12GB or above recommended).
+
+## 1. Download an Ubuntu Image
+
+You can download an Ubuntu image [here](https://ubuntu.com/download/desktop). Make sure to save it to a memorable location on your PC! For this tutorial, we will use the Ubuntu 23.04 release which uses the new Ubuntu Desktop installer that will be included in all future Ubuntu releases.
+
+If you are installing an older version of Ubuntu, such as Ubuntu 22.04 LTS, you will find that the visual presentation of the installer is different, but the overall flow should remain the same.
+
+![image](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/2/0/20dadd1038b0005f36662e07f2d2b2fc2adcb337.jpeg)
+
+## 2. Create a Bootable USB stick
+
+To install Ubuntu Desktop, you need to write your downloaded ISO to a USB stick to create the installation media. This is not the same as copying the ISO, and requires some bespoke software.
+
+For this tutorial, we’ll use [balenaEtcher](https://www.balena.io/etcher/), as it runs on Linux, Windows and Mac OS. Choose the version that corresponds to your current operating system, download and install the tool.
+
+![image](https://assets.ubuntu.com/v1/4d1a1dbd-create-a-bootable-usb-stick.png?_ga=2.173854115.1000759969.1693051872-1304239243.1673943591)
+
+Select your downloaded ISO, choose your USB flash drive, and then click Flash! to install your image.
+
+![](https://assets.ubuntu.com/v1/a40f15d2-select-iso.png?_ga=2.11980084.1000759969.1693051872-1304239243.1673943591)
+
+## 3. Boot from USB flash drive
+
+Insert the USB flash drive into the laptop or PC you want to use to install Ubuntu and boot or restart the device. It should recognise the installation media automatically. If not, try holding F12 during startup and selecting the USB device from the system-specific boot menu.
+
+Once the installer has initialised you will be invited to choose your language
+
+![](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/e/6/e650ba8eeab98bbe9ab5adbfa7708d18a5a468c6.png)
+
+And then presented with the option to try or install Ubuntu.
+
+![](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/5/b/5b9075674e7a219dfb8fb62b4730987d4e5ec699.png)
+
+<Callout type="info">
+  If you click **Try Ubuntu**, you can preview Ubuntu without making any changes
+  to your PC. You can return to the installer menu at any time by clicking the
+  Install Ubuntu shortcut on the desktop.
+</Callout>
+
+To proceed, click **Install Ubuntu**.
+
+You will be asked to select your keyboard layout. Once you’ve chosen one, click **Next**.
+
+![](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/0/b/0bad03d16ecbe65405ac4b8e2bff7f217fd698a7.png)
+
+Next you will be asked to connect to wi-fi, this will allow Ubuntu to download updates and third party drivers (such as NVIDIA graphics drivers) during installation. Once you have connected to wi-fi (or chosen to proceed offline) then we can continue to the installation setup.
+
+<FileTree>
+  Some PC’s use Intel RST (Rapid Storage Technology) which is not supported by
+  Ubuntu. If this is the case then you will not be able to proceed beyond this
+  point without disabling RST in the bios menu of your machine. If you encounter
+  this pop-up please visit [help.ubuntu.com/rst](https://help.ubuntu.com/rst/?_ga=2.139623732.66318305.1693054666-1783226518.1693054666) for more information.
+</FileTree>
+
+## 4. Installation Setup
+
+You will be prompted to choose between the **Normal installation** and **Minimal** installation options. The minimal installation is useful for those with smaller hard drives or who don’t require as many pre-installed applications.
+
+In **Other options**, you will be prompted to download updates as well as third-party software that may improve device support and performance (for example, Nvidia graphics drivers) during the installation. It is recommended to check both of these boxes.
+
+![image](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/d/1/d1234f14d7922434fe9467bde2ce5b25779e02fb.png)
+
+## 5. Type of installation
+
+This screen allows you to configure your installation. If you would like Ubuntu to be the only operating system on your hard drive, select **Erase disk and install Ubuntu**.
+
+If your device currently has another operating system installed, you will receive additional options to install Ubuntu alongside that OS rather than replacing it.
+
+![image](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/6/0/603543a56f2d3efba0ff1e81c6cd8e571fda93aa.png)
+
+Regardless of the option you select, clicking Next will take you to a summary of your installation configuration to give you a chance to confirm your setup before clicking **Install**
+
+![image](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/a/2/a20859cf4df184d8fa914c8ecbede500d148e1da.png)
+
+Once you proceed, Ubuntu will begin the installation process in the background and you will not be able to return to this point.
+
+Select your location and timezone from the map screen and click **Next**. This information will be detected automatically if you are connected to the internet.
+
+![image](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/3/4/34d81a0c6664e6741d2b0fa5b4ec61c37d11b561.jpeg)
+
+## 6. Create Your Login Details
+
+On this screen, you will be prompted to enter your name and the name of your computer as it will appear on the network. Finally, you will create a username and a strong password.
+
+You can choose to log in automatically or require a password. If you are using your device whilst travelling, it’s recommended to keep “Require my password to log in” enabled.
+
+![](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/0/a/0aa6e9e9856b94bc2b77b96e044816d31ba1c473.png)
+
+**Finally you can choose to switch your desktop from Light to Dark theme.**
+
+![image](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/d/3/d3ecf0323b7711be51d38955cf14e058b15c09b8.png)
+
+And then sit back and enjoy the slideshow as Ubuntu installs in the background!
+
+![image](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/7/2/7254c93ffecb65d353ef92f3aab514f8ebf073d6.jpeg)
+
+Once the installation has completed, you will be prompted to restart your machine.
+
+Click **Restart Now**.
+
+![image](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/7/8/78a68f3343f224aa9f1cc7acbfd80bb0ea8f646f.png)
+
+When you restart, you will be prompted to remove your USB flash drive from the device. Once you’ve done this, press **ENTER**.
+
+Enter your encryption password if you created one, followed by your user password on the login screen.
+
+And that’s it, welcome to your new Ubuntu Desktop!
+
+![image](https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/4/a/4aaac2cedd0c28af64161a6d8570d66ebbb7dc94.jpeg)

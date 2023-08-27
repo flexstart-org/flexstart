@@ -6,6 +6,16 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
+    "site#build": {
+      "dependsOn": ["^build"],
+      "env": [
+        "EMAIL_SERVER",
+        "SMTP_USER",
+        "SMTP_PASSWORD",
+        "TWITTER_AUTH_TOKEN"
+      ],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
     "dashboard#build": {
       "dependsOn": ["^build"],
       "env": [
@@ -21,16 +31,6 @@
         "EMAIL_SERVER",
         "SMTP_USER",
         "SMTP_PASSWORD"
-      ],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "site#build": {
-      "dependsOn": ["^build"],
-      "env": [
-        "EMAIL_SERVER",
-        "SMTP_USER",
-        "SMTP_PASSWORD",
-        "TWITTER_AUTH_TOKEN"
       ],
       "outputs": [".next/**", "!.next/cache/**"]
     },
