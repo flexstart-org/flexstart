@@ -11,6 +11,7 @@
     "site": "turbo dev --filter=site",
     "dash": "turbo dev --filter=dashboard",
     "docs": "turbo dev --filter=docs",
+    "shop": "turbo dev --filter=shop",
     "start": "turbo start",
     "lint": "turbo lint",
     "clean": "turbo clean",
