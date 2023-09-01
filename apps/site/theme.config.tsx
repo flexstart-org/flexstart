@@ -5,7 +5,11 @@ import Adsense from "@/components/adsense";
 import Footer from "@/components/footer";
 
 const config: DocsThemeConfig = {
+  docsRepositoryBase: "https://github.com/flexstart-org/flexstart",
+  editLink: { text: "" },
+  footer: { component: <Footer /> },
   nextThemes: { defaultTheme: "light" },
+  navigation: { prev: true, next: true },
   logo: (
     <>
       <Logo className="h-3 w-3 text-gray-600" />
@@ -21,7 +25,6 @@ const config: DocsThemeConfig = {
     link: "https://dash.flexstart.org/login",
   },
   search: { component: <></> },
-  docsRepositoryBase: "https://github.com/flexstart-org/docs",
   useNextSeoProps() {
     const pathname = usePathname();
     if (pathname == "/") {
@@ -126,38 +129,30 @@ const config: DocsThemeConfig = {
     defaultMenuCollapseLevel: 1,
     // toggleButton: true,
   },
-  main: ({ children }) => {
-    return (
-      <>
-        <div className="w-full h-24 relative overflow-hidden">
-          <div className="w-full !h-24 absolute">
-            <Adsense />
-          </div>
-        </div>
-        {children}
-        <div className="h-32 overflow-hidden">
-          <Adsense />
-          {/* <Adsense data-ad-format="autorelaxed" data-ad-slot="3683525643" /> */}
-        </div>
-      </>
-    );
-  },
-  navigation: {
-    prev: true,
-    next: true,
-  },
+  // main: ({ children }) => {
+  //   return (
+  //     <>
+  //       <div className="w-full h-24 relative overflow-hidden">
+  //         <div className="w-full !h-24 absolute">
+  //           <Adsense />
+  //         </div>
+  //       </div>
+  //       {children}
+  //       <div className="h-32 overflow-hidden">
+  //         <Adsense />
+  //         {/* <Adsense data-ad-format="autorelaxed" data-ad-slot="3683525643" /> */}
+  //       </div>
+  //     </>
+  //   );
+  // },
   toc: {
     extraContent: (
       <div className="w-full h-56 relative">
-        <div className="w-full !h-56 absolute overflow-hidden">
+        <div className="w-full !h-56 absolute">
           <Adsense />
         </div>
       </div>
     ),
-  },
-  editLink: { text: "" },
-  footer: {
-    component: <Footer />,
   },
 };
 

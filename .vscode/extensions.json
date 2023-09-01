@@ -1,5 +1,8 @@
 {
     "recommendations": [
-        "prisma.prisma"
+        "prisma.prisma",
+        "unifiedjs.vscode-mdx",
+        "esbenp.prettier-vscode",
+        "dsznajder.es7-react-js-snippets"
     ]
 }

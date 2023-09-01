@@ -17,15 +17,17 @@ export default async function crawler(
         priorityMap: [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0],
       });
 
-      // register event listeners
-      generator.on("done", () => {
-        // sitemaps created
-      });
-
       // start the crawler
       generator.start();
 
+      // register event listeners
+      generator.on("done", () => {
+        console.log("created");
+      });
+
       return res.status(200).json("created");
+    } else {
+      return res.status(400);
     }
   }
 }
