@@ -1,7 +1,7 @@
 import { usePathname } from "next/navigation";
 import { DocsThemeConfig, useConfig } from "nextra-theme-docs";
 import { Logo } from "@/components/shared/icons";
-import Adsense from "@/components/adsense";
+// import Adsense from "@/components/adsense";
 import Footer from "@/components/footer";
 
 const config: DocsThemeConfig = {
@@ -146,13 +146,14 @@ const config: DocsThemeConfig = {
   //   );
   // },
   toc: {
-    extraContent: (
-      <div className="w-full h-56 relative">
-        <div className="w-full !h-56 absolute">
-          <Adsense />
-        </div>
-      </div>
-    ),
+    backToTop: true,
+    // extraContent: (
+    //   <div className="w-full h-56 relative">
+    //     <div className="w-full !h-56 absolute">
+    //       <Adsense />
+    //     </div>
+    //   </div>
+    // ),
   },
 };
 
