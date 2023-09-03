@@ -1,31 +1,15 @@
-const FyersModel = require("fyers-api-v3").fyersModel;
-const FyersDataSocket = require("fyers-api-v3").fyersDataSocket;
-const FyersOrderSocket = require("fyers-api-v3").fyersOrderSocket;
+// const FyersModel = require("fyers-api-v3").fyersModel;
+// const FyersDataSocket = require("fyers-api-v3").fyersDataSocket;
+// const FyersOrderSocket = require("fyers-api-v3").fyersOrderSocket;
 
-const { App_ID, Secret_ID, Redirect_URL, Auth_URL, Authcode, Access_Token } = process.env;
+// const { App_ID, Secret_ID, Redirect_URL, Auth_URL, Authcode, Access_Token } = process.env;
 
-let fyers = new FyersModel({ path: "./" });
+// let fyers = new FyersModel({ path: "./" });
 
-fyers.setAppId(App_ID);
-fyers.setRedirectUrl(Redirect_URL);
+// fyers.setAppId(App_ID);
+// fyers.setRedirectUrl(Redirect_URL);
 // fyers.setAccessToken(Access_Token);
 
-const url = fyers.generateAuthCode();
-console.log(url);
-
-// fyers
-//   .generate_access_token({
-//     client_id: App_ID,
-//     secret_key: Secret_ID,
-//     auth_code: authcode,
-//   })
-//   .then((response) => {
-//     if (response.s == "ok") {
-//       console.log(response.access_token);
-//     } else {
-//       console.log("error generating access token", response);
-//     }
-//   });
 
 // fyers.get_profile().then((response)=>{
 //     console.log(response)

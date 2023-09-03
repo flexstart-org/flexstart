@@ -6,6 +6,16 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
+    "trade#build": {
+      "dependsOn": ["^build"],
+      "env": [
+        "App_ID",
+        "Secret_ID",
+        "Redirect_URL",
+        "Auth_URL"
+      ],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
     "site#build": {
       "dependsOn": ["^build"],
       "env": [
