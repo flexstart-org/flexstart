@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
 import { PRO_TIERS } from "@/lib/stripe/constants";
 // import { redis } from "@/lib/upstash";
-import { log } from "@/lib/utils";
+// import { log } from "@/lib/utils";
 
 // Stripe requires the raw body to construct the event.
 export const config = {
@@ -177,10 +177,10 @@ export default async function webhookHandler(
                 ]);
               })
             ),
-            log(
-              ":cry: User *`" + email + "`* deleted their subscription",
-              "links"
-            ),
+            // log(
+            //   ":cry: User *`" + email + "`* deleted their subscription",
+            //   "links"
+            // ),
           ]);
           console.log(response);
         } else {
