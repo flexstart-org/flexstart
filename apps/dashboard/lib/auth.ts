@@ -18,7 +18,7 @@ interface WithProjectNextApiHandler {
     req: NextApiRequest,
     res: NextApiResponse,
     project?: ProjectProps,
-    session?: Session,
+    session?: Session
   ): Promise<void>;
 }
 
@@ -33,7 +33,7 @@ const withProjectAuth =
       excludeGet?: boolean;
       needProSubscription?: boolean;
       needNotExceededUsage?: boolean;
-    } = {},
+    } = {}
   ) =>
   async (req: NextApiRequest, res: NextApiResponse) => {
     const session = (await getServerSession(req, res, authOptions)) as Session;
@@ -134,7 +134,7 @@ interface WithUsertNextApiHandler {
     req: NextApiRequest,
     res: NextApiResponse,
     session: Session,
-    user?: UserProps,
+    user?: UserProps
   ): Promise<void>;
 }
 
@@ -147,7 +147,7 @@ const withUserAuth =
     }: {
       needUserDetails?: boolean;
       needProSubscription?: boolean;
-    } = {},
+    } = {}
   ) =>
   async (req: NextApiRequest, res: NextApiResponse) => {
     const session = (await getServerSession(req, res, authOptions)) as Session;
@@ -167,16 +167,6 @@ const withUserAuth =
           email: true,
           stripeId: true,
           usageLimit: true,
-          ...(needProSubscription && {
-            projects: {
-              where: {
-                role: "owner",
-              },
-              select: {
-                projectId: true,
-              },
-            },
-          }),
         },
       })) as UserProps;
 

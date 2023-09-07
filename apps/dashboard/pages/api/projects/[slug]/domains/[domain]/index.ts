@@ -1,12 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { withProjectAuth } from "@/lib/auth";
-import { addDomain, removeDomain } from "@/lib/domains";
 import prisma from "@/lib/prisma";
 import * as k8s from "@kubernetes/client-node";
 import { validDomainRegex } from "@/lib/utils";
 // import { changeDomainForImages, changeDomainForLinks } from "@/lib/api/links";
 import { ProjectProps } from "@/lib/types";
-import cloudinary from "cloudinary";
+// import cloudinary from "cloudinary";
 
 export default withProjectAuth(
   async (req: NextApiRequest, res: NextApiResponse, project: ProjectProps) => {

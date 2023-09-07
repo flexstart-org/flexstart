@@ -1,11 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import * as k8s from "@kubernetes/client-node";
 import { Session, withProjectAuth } from "@/lib/auth";
-import { removeDomain } from "@/lib/domains";
 import prisma from "@/lib/prisma";
 import { ProjectProps } from "@/lib/types";
 import { getDateTimeLocal } from "@/lib/utils";
-// import { deleteProjectLinks } from "@/lib/api/links";
 // import cloudinary from "cloudinary";
 
 export default withProjectAuth(
