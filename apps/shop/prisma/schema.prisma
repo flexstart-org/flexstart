@@ -11,7 +11,7 @@ generator client {
 
 model Product {
     id               String   @id @default(uuid()) @map("_id")
-    handle           String @unique
+    handle           String   @unique
     availableForSale Boolean
     title            String
     description      String

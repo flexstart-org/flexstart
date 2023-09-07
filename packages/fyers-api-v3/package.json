@@ -1,6 +1,7 @@
 {
   "name": "fyers-api-v3",
   "version": "1.0.1",
+  "private": true,
   "description": "connect to fyers API",
   "main": "index.js",
   "scripts": {

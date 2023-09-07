@@ -121,7 +121,7 @@ export const getStats = async ({
   }
 
   let url = new URL(
-    `https://api.us-east.tinybird.co/v0/pipes/${endpoint}.json`,
+    `https://api.us-east.tinybird.co/v0/pipes/${endpoint}.json`
   );
   url.searchParams.append("domain", domain);
   url.searchParams.append("key", key);
@@ -131,22 +131,22 @@ export const getStats = async ({
       new Date(Date.now() - intervalData[interval].milliseconds)
         .toISOString()
         .replace("T", " ")
-        .replace("Z", ""),
+        .replace("Z", "")
     );
     url.searchParams.append(
       "end",
-      new Date(Date.now()).toISOString().replace("T", " ").replace("Z", ""),
+      new Date(Date.now()).toISOString().replace("T", " ").replace("Z", "")
     );
     url.searchParams.append("granularity", intervalData[interval].granularity);
   }
 
-  return await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${process.env.TINYBIRD_API_KEY}`,
-    },
-  })
-    .then((res) => res.json())
-    .then(({ data }) => {
-      return data;
-    });
+  // return await fetch(url, {
+  //   headers: {
+  //     Authorization: `Bearer ${process.env.TINYBIRD_API_KEY}`,
+  //   },
+  // })
+  //   .then((res) => res.json())
+  //   .then(({ data }) => {
+  //     return data;
+  //   });
 };
