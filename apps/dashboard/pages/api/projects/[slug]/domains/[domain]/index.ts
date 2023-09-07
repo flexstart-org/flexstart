@@ -35,7 +35,7 @@ export default withProjectAuth(
       ) {
         return res
           .status(400)
-          .json({ error: "Missing or misconfigured project slug or domain" });
+          .json({ error: "Missing or misconfigured project name or domain" });
       }
 
       const newDomain = req.body;
@@ -46,7 +46,7 @@ export default withProjectAuth(
 
       if (!validDomain) {
         return res.status(422).json({
-          domainError: "Invalid domain",
+          domainError: "Enter your valid custom domain",
         });
       }
 

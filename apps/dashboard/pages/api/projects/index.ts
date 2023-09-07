@@ -58,14 +58,14 @@ export default withUserAuth(
     }
 
     if (req.method === "POST") {
-      let domain = `${name}.flexstart.org`;
+      let domain = `${name}.app.flexstart.org`;
       const domainExists = await prisma.project.findFirst({
         where: { domain },
         select: { domain: true },
       });
 
       if (domainExists) {
-        domain = `${name + nanoid()}.flexstart.org`;
+        domain = `${name + nanoid()}.app.flexstart.org`;
       }
 
       const deployment = {

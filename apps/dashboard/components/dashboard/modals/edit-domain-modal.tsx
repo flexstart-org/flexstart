@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import {
   Dispatch,
   SetStateAction,
@@ -11,7 +11,7 @@ import {
 } from "react";
 import { mutate } from "swr";
 import { useDebounce } from "use-debounce";
-import BlurImage from "@/components/shared/blur-image";
+// import BlurImage from "@/components/shared/blur-image";
 import { AlertCircleFill } from "@/components/shared/icons";
 import LoadingDots from "@/components/shared/icons/loading-dots";
 import Modal from "@/components/shared/modal";
@@ -24,8 +24,8 @@ function EditDomainModal({
   showEditDomainModal: boolean;
   setShowEditDomainModal: Dispatch<SetStateAction<boolean>>;
 }) {
-  const searchParams = useSearchParams();
-  const slug = searchParams?.get("slug");
+  const params = useParams() as { slug: string };
+  const { slug } = params;
   const [saving, setSaving] = useState(false);
   const [domainError, setDomainError] = useState("");
   const { project: { domain } = {} } = useProject();
@@ -56,13 +56,13 @@ function EditDomainModal({
     >
       <div className="inline-block w-full transform overflow-hidden bg-white align-middle shadow-xl transition-all sm:max-w-md sm:rounded-2xl sm:border sm:border-gray-200">
         <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 px-4 py-4 pt-8 sm:px-16">
-          <BlurImage
+          {/* <BlurImage
             src={`https://www.google.com/s2/favicons?sz=64&domain_url=${domain}`}
             alt={"domain"}
             className="h-10 w-10 rounded-full border border-gray-200"
             width={20}
             height={20}
-          />
+          /> */}
           <h3 className="text-lg font-medium">Change Domain</h3>
           <p className="text-center text-sm text-gray-500">
             Warning: Changing your project&apos;s domain will break all existing

@@ -1,0 +1,27 @@
+datasource db {
+    provider     = "mongodb"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+model Product {
+    id               String   @id @default(uuid()) @map("_id")
+    handle           String @unique
+    availableForSale Boolean
+    title            String
+    description      String
+    descriptionHtml  String
+    options          Json
+    priceRange       Json
+    variants         Json
+    featuredImage    Json
+    images           Json
+    seo              Json
+    tags             Json
+    updatedAt        DateTime @updatedAt
+}
