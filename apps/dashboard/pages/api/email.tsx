@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import sendMail from "@/emails";
-import ContactEmail from "@/emails/ContactEMail";
+import ContactEmail from "@/emails/ContactEmail";
 
 export default async function handler(
   req: NextApiRequest,
