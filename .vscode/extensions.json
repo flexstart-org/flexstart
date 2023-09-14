@@ -4,6 +4,10 @@
         "unifiedjs.vscode-mdx",
         "esbenp.prettier-vscode",
         "dsznajder.es7-react-js-snippets",
-        "csstools.postcss"
+        "csstools.postcss",
+        "yzhang.markdown-all-in-one",
+        "heybourn.headwind",
+        "christian-kohler.npm-intellisense",
+        "bradlc.vscode-tailwindcss"
     ]
 }

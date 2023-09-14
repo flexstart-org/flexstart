@@ -8,69 +8,62 @@ const FyersOrderSocket = require("fyers-api-v3").fyersOrderSocket;
 const { appID, accessToken, stockCode } = {
   appID: "S3ZENE8T7T-100",
   accessToken:
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGkuZnllcnMuaW4iLCJpYXQiOjE2OTM4MTM3NjAsImV4cCI6MTY5Mzg3MzgyMCwibmJmIjoxNjkzODEzNzYwLCJhdWQiOlsieDowIiwieDoxIiwieDoyIiwiZDoxIiwiZDoyIiwieDoxIiwieDowIl0sInN1YiI6ImFjY2Vzc190b2tlbiIsImF0X2hhc2giOiJnQUFBQUFCazlZd0FlaC1nWnRpQklUcUhSYTBZb0IyTlEzaVl3WHoxb2hCTjAzVGlDZUFWODAwUF9yTGJPSlJkNXUtazVtS3BXeTctb0dhTDBwRUlGdGtRb0hHNjV1cGY0VlhvRTlvUENrdXdrNl9KcGJUTjczOD0iLCJkaXNwbGF5X25hbWUiOiJNSVRFU0ggUkFNQSBHVVBUQSIsIm9tcyI6IksxIiwiaHNtX2tleSI6ImI0MGY1N2Q2NjljNmVkYjQ3OTU2ZWY3MzIwZmEyNmJhZmU5MDcwMzNiOGJmNjNhNDYwZjI4YjdlIiwiZnlfaWQiOiJYTTQyNDYxIiwiYXBwVHlwZSI6MTAwLCJwb2FfZmxhZyI6Ik4ifQ.L9_Gd6yrz7KiYCrNkI7SeCpsWr4GPQqhaB9qKV89Q6k",
-  stockCode: "NSE:BHARTIARTL-EQ",
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGkuZnllcnMuaW4iLCJpYXQiOjE2OTQyNzkwNjIsImV4cCI6MTY5NDMwNTgyMiwibmJmIjoxNjk0Mjc5MDYyLCJhdWQiOlsieDowIiwieDoxIiwieDoyIiwiZDoxIiwiZDoyIiwieDoxIiwieDowIl0sInN1YiI6ImFjY2Vzc190b2tlbiIsImF0X2hhc2giOiJnQUFBQUFCa19LV1dXQUVVYkpFR0VMTFpfUDhqTTVYUTZDb0RIdThWc3FEMHl2M1E1clg5eEZfYnV4U3pLczFRSDZPakotZ256X2M3aTV5eDhxaWRyNE8zOExwd3p3Wml4WEtvLXFLQmpJRmdFOG8yRTB2eFRNND0iLCJkaXNwbGF5X25hbWUiOiJNSVRFU0ggUkFNQSBHVVBUQSIsIm9tcyI6IksxIiwiaHNtX2tleSI6IjVjNWUwOGQyMmI4ZTExMWQ1NGVmMTk4ZDNkZGFhOGVmMTIyODY5MzVmZmE4MGVhNTQ3ZTUxNTVkIiwiZnlfaWQiOiJYTTQyNDYxIiwiYXBwVHlwZSI6MTAwLCJwb2FfZmxhZyI6Ik4ifQ.btRWRhXKJXupcNAD7i61pfcYrRZKZ9d8Xpa5ASECm4M",
+  stockCode: "NSE:IDEA-EQ",
 };
 
 const fyers = new FyersAPI();
 const fyersdata = new FyersDataSocket(`${appID}:${accessToken}`);
 const fyersOrderdata = new FyersOrderSocket(`${appID}:${accessToken}`);
+
 fyers.setAppId(appID);
 fyers.setAccessToken(accessToken);
 
-// fyers.get_profile().then((response)=>{
-//     console.log(response)
-// }).catch((err)=>{
-//     console.log(err)
-// })
+fyersOrderdata.on("connect", () => {
+  fyersOrderdata.subscribe([fyersOrderdata.orderUpdates]);
+});
 
-// fyers.getMarketDepth({"symbol":["NSE:SBIN-EQ","NSE:TCS-EQ"],"ohlcv_flag":1}).then((response)=>{
-//     console.log(response)
-// }).catch((err)=>{
-//     console.log(err)
-// })
+fyersOrderdata.on("error", (err) => {
+  console.log(err);
+});
 
-// fyers.market_status().then((res) => {
-//   console.log(res);
-// });
+fyersOrderdata.on("close", () => {
+  console.log("closed");
+});
 
-const main = (orderId) => {
+fyersOrderdata.on("orders", (msg) => {
+  console.log("orders", msg);
+  console.log(msg.s, msg.orders.tradedPrice, msg.orders.status);
+});
+
+fyersOrderdata.autoreconnect();
+fyersOrderdata.connect();
+
+const main = async (orderId = undefined) => {
   if (orderId) {
-    const reqBody = { order_id: orderId };
+    const order = await fyers.get_filtered_orders({ order_id: orderId });
+    console.log(order);
 
-    fyers
-      .get_filtered_orders(reqBody)
-      .then((res) => {
-        console.log(res);
-        if (res.orderBook[0].status == 2) {
-          const buyPrice = res.orderBook[0].tradedPrice;
-          trade(buyPrice);
-        } else {
-          console.log("order status is different");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (order.orderBook[0].status == 2) {
+      const buyPrice = order.orderBook[0].tradedPrice;
+      trade(buyPrice);
+    } else {
+      console.log("order status is different");
+    }
   } else {
-    getOrders();
+    const orders = await fyers.get_orders();
+    console.log(orders);
+    if (
+      orders.orderBook[0].symbol == stockCode &&
+      orders.orderBook[0].side == 1 &&
+      orders.orderBook[0].status == 2
+    ) {
+      const buyPrice = orders.orderBook[0].tradedPrice;
+      console.log(buyPrice);
+    } else {
+      placeOrder();
+    }
   }
-};
-
-const getOrders = () => {
-  fyers.get_orders
-    .then((res) => {
-      console.log(res);
-      if (res.orderBook[0].symbol == stockCode && res.orderBook[0].side == 1) {
-        const orderId = res.orderBook[0].id;
-        main(orderId);
-      } else {
-        placeOrder();
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 };
 
 const placeOrder = () => {
@@ -80,7 +73,7 @@ const placeOrder = () => {
     type: 2,
     side: 1,
     productType: "INTRADAY",
-    limitPrice: 0,
+    limitPrice: 10.5,
     stopPrice: 0,
     disclosedQty: 0,
     validity: "DAY",
@@ -149,7 +142,7 @@ const trade = (buyPrice) => {
     fyersdata.subscribe([stockCode]); //not subscribing for market depth data
     // fyersdata.subscribe([stockCode],true) //subscribing for market depth
     fyersdata.mode(fyersdata.LiteMode); //set data mode to lite mode
-    fyersdata.autoreconnect(); //enable auto reconnection mechanism in case of disconnection
+    fyersdata.autoreconnect();
   });
 
   fyersdata.on("error", (err) => {
@@ -163,42 +156,35 @@ const trade = (buyPrice) => {
   fyersdata.connect();
 };
 
-/*
-fyersOrderdata.on('connect', () => {
-    fyersOrderdata.subscribe([fyersOrderdata.orderUpdates,fyersOrderdata.tradeUpdates,fyersOrderdata.positionUpdates,fyersOrderdata.edis,fyersOrderdata.pricealerts]);
-    fyersOrderdata.autoreconnect();
-});
+// main();
 
-//for ticks of general data like price-alerts,EDIS
-fyersOrderdata.on('general', (msg) => {
-    console.log(msg);
-});
+// fyers.get_profile().then((response)=>{
+//     console.log(response)
+// }).catch((err)=>{
+//     console.log(err)
+// })
 
-//for ticks of orderupdates
-fyersOrderdata.on('orders', (msg) => {
-    console.log("orders",msg)
-})
+// fyers.get_orders().then((response) => {
+//   console.log(response)
+// }).catch((error) => {
+//   console.log(error)
+// })
 
-//for ticks of tradebook
-fyersOrderdata.on('trades', (msg) => {
-    console.log('trades',msg)
-})
+// fyers.get_filtered_orders({order_id:"23090900003182"}).then((response) => {
+//   console.log(response)
+// }).catch((error) => {
+//   console.log(error)
+// })
 
-//for ticks of positions
-fyersOrderdata.on('positions', (msg) => {
-    console.log('positions',msg)
-})
+// fyers.getMarketDepth({"symbol":["NSE:SBIN-EQ","NSE:TCS-EQ"],"ohlcv_flag":1}).then((response)=>{
+//     console.log(response)
+// }).catch((err)=>{
+//     console.log(err)
+// })
 
-fyersOrderdata.on('close', () => {
-    console.log('closed');
-});
-
-fyersOrderdata.on("error", (err) => {
-    console.log(err);
-});
-
-fyersOrderdata.connect();
-*/
+// fyers.market_status().then((res) => {
+//   console.log(res);
+// });
 
 /*
 Fyers Model:-

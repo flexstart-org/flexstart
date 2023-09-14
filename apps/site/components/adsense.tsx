@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useRef } from "react";
 import { useState, useEffect } from "react";
 
@@ -19,7 +19,7 @@ function Ads() {
     if (!insHasChildren) {
       executeWindowAds();
     }
-  }, []);
+  }, [adsRef]);
 
   return (
     <ins
@@ -35,21 +35,21 @@ function Ads() {
 }
 
 export default function Adsense() {
-  const router = useRouter();
-  const [adUnit, setAdUnit] = useState(true);
+  // const router = useRouter();
+  // const [adUnit, setAdUnit] = useState(true);
 
-  useEffect(() => {
-    const onRouteChangeStart = () => setAdUnit(false);
-    const onRouteChangeComplete = () => setAdUnit(true);
+  // useEffect(() => {
+  //   const onRouteChangeStart = () => setAdUnit(false);
+  //   const onRouteChangeComplete = () => setAdUnit(true);
 
-    router.events.on("routeChangeStart", onRouteChangeStart);
-    router.events.on("routeChangeComplete", onRouteChangeComplete);
+  //   router.events.on("routeChangeStart", onRouteChangeStart);
+  //   router.events.on("routeChangeComplete", onRouteChangeComplete);
 
-    return () => {
-      router.events.off("routeChangeStart", onRouteChangeStart);
-      router.events.off("routeChangeComplete", onRouteChangeComplete);
-    };
-  }, [router.events]);
+  //   return () => {
+  //     router.events.off("routeChangeStart", onRouteChangeStart);
+  //     router.events.off("routeChangeComplete", onRouteChangeComplete);
+  //   };
+  // }, [router.events]);
 
-  return adUnit ? <Ads /> : null;
+  return <Ads />;
 }

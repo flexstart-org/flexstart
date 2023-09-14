@@ -1,7 +1,7 @@
 import { usePathname } from "next/navigation";
 import { DocsThemeConfig, useConfig } from "nextra-theme-docs";
 import { Logo } from "@/components/shared/icons";
-// import Adsense from "@/components/adsense";
+import Adsense from "@/components/adsense";
 import Footer from "@/components/footer";
 
 const config: DocsThemeConfig = {
@@ -12,7 +12,7 @@ const config: DocsThemeConfig = {
   navigation: { prev: true, next: true },
   logo: (
     <>
-      <Logo className="h-3 w-3 text-gray-600" />
+      <Logo className="w-3 h-3 text-gray-600" />
       <span className="ml-2 font-bold">Flexstart</span>
     </>
   ),
@@ -126,34 +126,32 @@ const config: DocsThemeConfig = {
       }
       return <>{title}</>;
     },
-    defaultMenuCollapseLevel: 1,
+    defaultMenuCollapseLevel: 2,
     toggleButton: true,
   },
-  // main: ({ children }) => {
-  //   return (
-  //     <>
-  //       <div className="w-full h-24 relative overflow-hidden">
-  //         <div className="w-full !h-24 absolute">
-  //           <Adsense />
-  //         </div>
-  //       </div>
-  //       {children}
-  //       <div className="h-32 overflow-hidden">
-  //         <Adsense />
-  //         {/* <Adsense data-ad-format="autorelaxed" data-ad-slot="3683525643" /> */}
-  //       </div>
-  //     </>
-  //   );
-  // },
+  main: ({ children }) => {
+    return (
+      <>
+        {/* <div className="relative w-full h-24 overflow-hidden">
+          <div className="w-full !h-24 absolute">
+            <Adsense />
+          </div>
+        </div> */}
+        {children}
+        <div className="w-auto h-32 overflow-hidden">
+          <Adsense />
+          {/* <Adsense data-ad-format="autorelaxed" data-ad-slot="3683525643" /> */}
+        </div>
+      </>
+    );
+  },
   toc: {
     backToTop: true,
-    // extraContent: (
-    //   <div className="w-full h-56 relative">
-    //     <div className="w-full !h-56 absolute">
-    //       <Adsense />
-    //     </div>
-    //   </div>
-    // ),
+    extraContent: (
+      <div className="h-56 w-52">
+        <Adsense />
+      </div>
+    ),
   },
 };
 

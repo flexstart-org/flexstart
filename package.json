@@ -9,6 +9,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "flashds": "turbo dev --filter=flashds",
     "dash": "turbo dev --filter=dashboard",
     "shop": "turbo dev --filter=shop",
     "site": "turbo dev --filter=site",
