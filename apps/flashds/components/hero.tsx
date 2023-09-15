@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
     <div className="bg-white">
@@ -5,7 +7,7 @@ export default function Hero() {
         <div className="relative px-6 pt-16 isolate bg-orange-50 sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
           <div className="max-w-md mx-auto text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
             <h2 className="text-3xl font-bold tracking-tight text-black sm:text-5xl">
-              Don't listen to
+              Don&apos;t listen to
               <br />
               What they say,
               <br />
@@ -20,9 +22,10 @@ export default function Hero() {
                 href="#"
                 className="flex rounded-xl bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                <img
+                <Image
                   src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
                   width={28}
+                  height={36}
                   alt="image"
                 />
                 <div className="ml-3">
@@ -34,9 +37,10 @@ export default function Hero() {
                 href="#"
                 className="flex rounded-xl bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                <img
+                <Image
                   src="https://upload.wikimedia.org/wikipedia/commons/5/55/Google_Play_2016_icon.svg"
                   width={28}
+                  height={36}
                   alt="image"
                 />
                 <div className="ml-3">
@@ -47,7 +51,7 @@ export default function Hero() {
             </div>
           </div>
           <div className="relative flex justify-center mt-16 h-80 lg:mt-8">
-            <img
+            <Image
               className="absolute lg:left-0 top-0 lg:w-[28rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
               src="https://nextap.eu/img/references/steller/mockup.png"
               alt="App screenshot"

@@ -61,9 +61,9 @@ const Pricing = () => {
   return (
     <MaxWidthWrapper className="my-20 text-center">
       <div id="pricing" className="mx-auto my-10 sm:max-w-lg">
-        <p className="my-5 text-gray-600 sm:text-md">PRICING TABLE</p>
+        <p className="my-5 text-base font-semibold leading-7 text-gray-600">PRICING TABLE</p>
         <h2 className="text-3xl font-semibold text-black font-display">
-          Choose the plan that's right for you
+          Choose the plan that&apos;s right for you
         </h2>
       </div>
 

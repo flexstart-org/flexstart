@@ -1,3 +1,4 @@
+import Image from "next/image";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 
 export default function CTA() {
@@ -10,7 +11,7 @@ export default function CTA() {
               <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
                 Download the travellers community app now!
               </h2>
-              <p className="mt-4 text-md leading-8 text-white">
+              <p className="mt-4 leading-8 text-white text-md">
                 Be the first one to explore one of the best travel application
               </p>
               <div className="flex items-center justify-center mt-6 gap-x-6">
@@ -18,9 +19,10 @@ export default function CTA() {
                   href="#"
                   className="flex rounded-xl bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
-                  <img
+                  <Image
                     src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
                     width={28}
+                    height={36}
                     alt="image"
                   />
                   <div className="ml-3">
@@ -32,9 +34,10 @@ export default function CTA() {
                   href="#"
                   className="flex rounded-xl bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
-                  <img
+                  <Image
                     src="https://upload.wikimedia.org/wikipedia/commons/5/55/Google_Play_2016_icon.svg"
                     width={28}
+                    height={36}
                     alt="image"
                   />
                   <div className="ml-3">
