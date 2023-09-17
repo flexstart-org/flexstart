@@ -5,9 +5,10 @@ import Adsense from "@/components/adsense";
 import Footer from "@/components/footer";
 
 const config: DocsThemeConfig = {
+  search: { component: <></> },
   docsRepositoryBase: "https://github.com/flexstart-org/flexstart",
   editLink: { text: "" },
-  footer: { component: <Footer /> },
+  footer: { component: Footer },
   nextThemes: { defaultTheme: "light" },
   navigation: { prev: true, next: true },
   logo: (
@@ -24,7 +25,6 @@ const config: DocsThemeConfig = {
     ),
     link: "https://dash.flexstart.org/login",
   },
-  search: { component: <></> },
   useNextSeoProps() {
     const pathname = usePathname();
     if (pathname == "/") {
