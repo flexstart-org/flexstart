@@ -1,0 +1,10 @@
+{
+    "name": "Codespace for Flexstart!",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "GitHub.copilot"
+            ]
+        }
+    }
+}
