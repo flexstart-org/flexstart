@@ -8,6 +8,7 @@
         "yzhang.markdown-all-in-one",
         "heybourn.headwind",
         "christian-kohler.npm-intellisense",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "github.copilot"
     ]
 }

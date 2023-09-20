@@ -20,7 +20,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "dependencies": {
-    "@prisma/client": "^5.2.0",
+    "@prisma/client": "^5.3.1",
     "postcss": "^8.4.29"
   },
   "devDependencies": {
@@ -31,7 +31,7 @@
     "next": "^13.4.19",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3",
-    "prisma": "^5.2.0",
+    "prisma": "^5.3.1",
     "turbo": "^1.10.14"
   },
   "packageManager": "yarn@1.22.19"

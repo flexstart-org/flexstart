@@ -23,7 +23,13 @@
     },
     "shop#build": {
       "dependsOn": ["^build"],
-      "env": ["DATABASE_URL"],
+      "env": [
+        "DATABASE_URL",
+        "COMPANY_NAME",
+        "TWITTER_CREATOR",
+        "TWITTER_SITE",
+        "SITE_NAME"
+      ],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "dashboard#build": {
