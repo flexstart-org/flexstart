@@ -48,7 +48,7 @@ function ThreeItemGridItem({
 }
 
 export async function ThreeItemGrid() {
-  const homepageItems = await fetch("/api/products").then((res) => res.json());
+  const homepageItems = await fetch("https://shop.flexstart.org/api/products").then((res) => res.json());
   // const homepageItems = await prisma.product.findMany({
   //   take: 3,
   // });
