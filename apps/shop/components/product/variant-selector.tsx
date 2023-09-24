@@ -22,7 +22,7 @@ export function VariantSelector({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const hasNoOptionsOrJustOneOption =
-    !options.length || (options.length === 1 && options[0]?.values.length === 1);
+    !options?.length || (options.length === 1 && options[0]?.values.length === 1);
 
   if (hasNoOptionsOrJustOneOption) {
     return null;
@@ -40,7 +40,7 @@ export function VariantSelector({
 
   return options.map((option) => (
     <dl className="mb-8" key={option.id}>
-      <dt className="mb-4 text-sm uppercase tracking-wide">{option.name}</dt>
+      <dt className="mb-4 text-sm tracking-wide uppercase">{option.name}</dt>
       <dd className="flex flex-wrap gap-3">
         {option.values.map((value) => {
           const optionNameLowerCase = option.name.toLowerCase();

@@ -21,11 +21,11 @@ export default function EditItemQuantityButton({
     <button
       aria-label={type === 'plus' ? 'Increase item quantity' : 'Reduce item quantity'}
       onClick={() => {
-        startTransition(async () => {
+        startTransition(() => {
           const error =
             type === 'minus' && item.quantity - 1 === 0
-              ? await removeItem(item.id)
-              : await updateItemQuantity({
+              ? removeItem(item.id)
+              : updateItemQuantity({
                   lineId: item.id,
                   variantId: item.merchandise.id,
                   quantity: type === 'plus' ? item.quantity + 1 : item.quantity - 1
@@ -51,9 +51,9 @@ export default function EditItemQuantityButton({
       {isPending ? (
         <LoadingDots className="bg-black dark:bg-white" />
       ) : type === 'plus' ? (
-        <PlusIcon className="h-4 w-4 dark:text-neutral-500" />
+        <PlusIcon className="w-4 h-4 dark:text-neutral-500" />
       ) : (
-        <MinusIcon className="h-4 w-4 dark:text-neutral-500" />
+        <MinusIcon className="w-4 h-4 dark:text-neutral-500" />
       )}
     </button>
   );

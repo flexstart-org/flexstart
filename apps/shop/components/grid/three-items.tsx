@@ -1,7 +1,8 @@
+"use client";
+
 import { GridTileImage } from "components/grid/tile";
 // import type { Product } from "lib/shopify/types";
 import Link from "next/link";
-import prisma from "lib/prisma";
 
 function ThreeItemGridItem({
   item,
@@ -47,7 +48,10 @@ function ThreeItemGridItem({
 }
 
 export async function ThreeItemGrid() {
-  const homepageItems = await prisma.product.findMany();
+  const homepageItems = await fetch("/api/products").then((res) => res.json());
+  // const homepageItems = await prisma.product.findMany({
+  //   take: 3,
+  // });
 
   // if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 

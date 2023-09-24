@@ -1,27 +1,69 @@
 datasource db {
-    provider     = "mongodb"
-    url          = env("DATABASE_URL")
-    relationMode = "prisma"
+  provider     = "mongodb"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["fullTextSearch", "fullTextIndex"]
+  provider        = "prisma-client-js"
+  // output          = "../../../node_modules/@prisma/client/mongodb"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 model Product {
-    id               String   @id @default(uuid()) @map("_id")
-    handle           String   @unique
-    availableForSale Boolean
-    title            String
-    description      String
-    descriptionHtml  String
-    options          Json
-    priceRange       Json
-    variants         Json
-    featuredImage    Json
-    images           Json
-    seo              Json
-    tags             Json
-    updatedAt        DateTime @updatedAt
+  id               String          @id @default(uuid()) @map("_id")
+  handle           String          @unique
+  availableForSale Boolean
+  title            String
+  description      String
+  descriptionHtml  String?
+  options          ProductOption[]
+  priceRange       PriceRange
+  variants         ProductVariant?
+  featuredImage    Image
+  images           Image[]
+  seo              SEO
+  tags             String[]
+  updatedAt        DateTime        @updatedAt
+}
+
+type Image {
+  url     String
+  altText String
+  width   Int?
+  height  Int?
+}
+
+type SEO {
+  title       String
+  description String
+}
+
+type PriceRange {
+  minVariantPrice Money
+  maxVariantPrice Money
+}
+
+type ProductOption {
+  id     String
+  name   String
+  values String[]
+}
+
+type ProductVariant {
+  id               String
+  title            String
+  availableForSale Boolean
+  selectedOptions  SelectedOptions[]
+  price            Money
+}
+
+type SelectedOptions {
+  name  String
+  value String
+}
+
+type Money {
+  amount       String
+  currencyCode String
 }

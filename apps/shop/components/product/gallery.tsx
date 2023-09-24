@@ -7,19 +7,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-export function Gallery({ images }: { images: { src: string; altText: string }[] }) {
+export function Gallery({ images }: { images: { url: string; altText: string }[] }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const imageSearchParam = searchParams.get('image');
   const imageIndex = imageSearchParam ? parseInt(imageSearchParam) : 0;
 
   const nextSearchParams = new URLSearchParams(searchParams.toString());
-  const nextImageIndex = imageIndex + 1 < images.length ? imageIndex + 1 : 0;
+  const nextImageIndex = imageIndex + 1 < images?.length ? imageIndex + 1 : 0;
   nextSearchParams.set('image', nextImageIndex.toString());
   const nextUrl = createUrl(pathname, nextSearchParams);
 
   const previousSearchParams = new URLSearchParams(searchParams.toString());
-  const previousImageIndex = imageIndex === 0 ? images.length - 1 : imageIndex - 1;
+  const previousImageIndex = imageIndex === 0 ? images?.length - 1 : imageIndex - 1;
   previousSearchParams.set('image', previousImageIndex.toString());
   const previousUrl = createUrl(pathname, previousSearchParams);
 
@@ -35,7 +35,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
             fill
             sizes="(min-width: 1024px) 66vw, 100vw"
             alt={images[imageIndex]?.altText as string}
-            src={images[imageIndex]?.src as string}
+            src={images[imageIndex]?.url as string}
             priority={true}
           />
         )}
@@ -74,7 +74,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
             imageSearchParams.set('image', index.toString());
 
             return (
-              <li key={image.src} className="w-20 h-20">
+              <li key={image.url} className="w-20 h-20">
                 <Link
                   aria-label="Enlarge product image"
                   href={createUrl(pathname, imageSearchParams)}
@@ -83,7 +83,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
                 >
                   <GridTileImage
                     alt={image.altText}
-                    src={image.src}
+                    src={image.url}
                     width={80}
                     height={80}
                     active={isActive}

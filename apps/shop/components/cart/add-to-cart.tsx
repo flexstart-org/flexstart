@@ -18,8 +18,8 @@ export function AddToCart({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
-  const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
-  const variant = variants.find((variant: ProductVariant) =>
+  const defaultVariantId = variants?.length === 1 ? variants[0]?.id : undefined;
+  const variant = variants?.find((variant: ProductVariant) =>
     variant.selectedOptions.every(
       (option) => option.value === searchParams.get(option.name.toLowerCase())
     )
@@ -40,8 +40,8 @@ export function AddToCart({
         // Safeguard in case someone messes with `disabled` in devtools.
         if (!availableForSale || !selectedVariantId) return;
 
-        startTransition(async () => {
-          const error = await addItem(selectedVariantId);
+        startTransition(() => {
+          const error = addItem(selectedVariantId);
 
           if (error) {
             // Trigger the error boundary in the root error.js

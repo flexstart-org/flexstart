@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { GridTileImage } from "components/grid/tile";
+// import { GridTileImage } from "components/grid/tile";
 import Footer from "components/layout/footer";
 import { Gallery } from "components/product/gallery";
 import { ProductDescription } from "components/product/product-description";
 // import { HIDDEN_PRODUCT_TAG } from "lib/constants";
-import { getProduct, getProductRecommendations } from "lib/shopify";
+// import { getProduct, getProductRecommendations } from "lib/shopify";
 import { Image } from "lib/shopify/types";
-import Link from "next/link";
-import prisma from "lib/prisma";
+// import Link from "next/link";
+// import prisma from "lib/prisma";
 
 // export const runtime = 'edge';
 
@@ -18,12 +18,12 @@ export async function generateMetadata({
 }: {
   params: { handle: string };
 }): Promise<Metadata> {
-  // const product = await getProduct(params.handle);
-  const product = await prisma.product.findUnique({
-    where: {
-      handle: params.handle,
-    },
-  });
+  const product = await fetch(`https://shop.flexstart.org/api/products?handle=${params.handle}`).then((res) => res.json());
+  // const product = await prisma.product.findUnique({
+  //   where: {
+  //     handle: params.handle,
+  //   },
+  // });
 
   if (!product) return notFound();
 
@@ -62,11 +62,12 @@ export default async function ProductPage({
   params: { handle: string };
 }) {
   // const product = await getProduct(params.handle);
-  const product = await prisma.product.findMany({
-    where: {
-      handle: params.handle,
-    },
-  });
+  const product = await fetch(`https://shop.flexstart.org/api/products?handle=${params.handle}`).then((res) => res.json());
+  // const product = await prisma.product.findUnique({
+  //   where: {
+  //     handle: params.handle,
+  //   },
+  // });
 
   if (!product) return notFound();
 
@@ -99,8 +100,8 @@ export default async function ProductPage({
         <div className="flex flex-col p-8 bg-white border rounded-lg border-neutral-200 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
           <div className="w-full h-full basis-full lg:basis-4/6">
             <Gallery
-              images={product.images?.map((image: Image) => ({
-                src: image.url,
+              images={product.images.map((image: Image) => ({
+                url: image.url,
                 altText: image.altText,
               }))}
             />
@@ -111,7 +112,7 @@ export default async function ProductPage({
           </div>
         </div>
         <Suspense>
-          <RelatedProducts id={product.id} />
+          {/* <RelatedProducts id={product.id} /> */}
         </Suspense>
       </div>
       <Suspense>
@@ -121,39 +122,39 @@ export default async function ProductPage({
   );
 }
 
-async function RelatedProducts({ id }: { id: string }) {
-  const relatedProducts = await getProductRecommendations(id);
+// async function RelatedProducts({ id }: { id: string }) {
+//   const relatedProducts = await getProductRecommendations(id);
 
-  if (!relatedProducts.length) return null;
+//   if (!relatedProducts.length) return null;
 
-  return (
-    <div className="py-8">
-      <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
-      <ul className="flex w-full gap-4 pt-1 overflow-x-auto">
-        {relatedProducts.map((product) => (
-          <li
-            key={product.handle}
-            className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
-          >
-            <Link
-              className="relative w-full h-full"
-              href={`/product/${product.handle}`}
-            >
-              <GridTileImage
-                alt={product.title}
-                label={{
-                  title: product.title,
-                  amount: product.priceRange.maxVariantPrice.amount,
-                  currencyCode: product.priceRange.maxVariantPrice.currencyCode,
-                }}
-                src={product.featuredImage?.url}
-                fill
-                sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+//   return (
+//     <div className="py-8">
+//       <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
+//       <ul className="flex w-full gap-4 pt-1 overflow-x-auto">
+//         {relatedProducts.map((product) => (
+//           <li
+//             key={product.handle}
+//             className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
+//           >
+//             <Link
+//               className="relative w-full h-full"
+//               href={`/product/${product.handle}`}
+//             >
+//               <GridTileImage
+//                 alt={product.title}
+//                 label={{
+//                   title: product.title,
+//                   amount: product.priceRange.maxVariantPrice.amount,
+//                   currencyCode: product.priceRange.maxVariantPrice.currencyCode,
+//                 }}
+//                 src={product.featuredImage?.url}
+//                 fill
+//                 sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
+//               />
+//             </Link>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
