@@ -19,7 +19,7 @@ model Product {
   descriptionHtml  String?
   options          ProductOption[]
   priceRange       PriceRange
-  variants         ProductVariant?
+  variants         ProductVariant[]
   featuredImage    Image
   images           Image[]
   seo              SEO
