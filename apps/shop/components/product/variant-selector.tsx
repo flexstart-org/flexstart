@@ -28,7 +28,7 @@ export function VariantSelector({
     return null;
   }
 
-  const combinations: Combination[] = variants.map((variant) => ({
+  const combinations: Combination[] = variants?.map((variant) => ({
     id: variant.id,
     availableForSale: variant.availableForSale,
     // Adds key / value pairs for each variant (ie. "color": "Black" and "size": 'M").
@@ -67,7 +67,7 @@ export function VariantSelector({
               (option) => option.name.toLowerCase() === key && option.values.includes(value)
             )
           );
-          const isAvailableForSale = combinations.find((combination) =>
+          const isAvailableForSale = combinations?.find((combination) =>
             filtered.every(
               ([key, value]) => combination[key] === value && combination.availableForSale
             )

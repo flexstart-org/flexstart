@@ -50,7 +50,7 @@ function ThreeItemGridItem({
 export async function ThreeItemGrid() {
   const homepageItems = await fetch("https://shop.flexstart.org/api/products", {cache: "no-store"}).then((res) => res.json());
 
-  // if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
+  if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 
   const [firstProduct, secondProduct, thirdProduct] = homepageItems;
 
