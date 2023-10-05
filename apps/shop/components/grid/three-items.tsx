@@ -1,5 +1,3 @@
-"use client";
-
 import { GridTileImage } from "components/grid/tile";
 // import type { Product } from "lib/shopify/types";
 import Link from "next/link";
@@ -48,7 +46,10 @@ function ThreeItemGridItem({
 }
 
 export async function ThreeItemGrid() {
-  const homepageItems = await fetch("https://shop.flexstart.org/api/products", {cache: "no-store"}).then((res) => res.json());
+  const homepageItems = await fetch("https://shop.flexstart.org/api/products", {
+    method: "GET",
+    cache: "no-store",
+  }).then((res) => res.json());
 
   if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 

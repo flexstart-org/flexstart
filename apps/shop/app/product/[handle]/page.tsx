@@ -66,7 +66,7 @@ export default async function ProductPage({
   // const product = await getProduct(params.handle);
   const product = await fetch(
     `https://shop.flexstart.org/api/products?handle=${params.handle}`,
-    { cache: "no-store" }
+    { method: "GET", cache: "no-store" }
   ).then((res) => res.json());
 
   if (!product) return notFound();
@@ -111,7 +111,7 @@ export default async function ProductPage({
             <ProductDescription product={product} />
           </div>
         </div>
-        <Suspense>{/* <RelatedProducts id={product.id} /> */}</Suspense>
+        {/* <Suspense><RelatedProducts id={product.id} /></Suspense> */}
       </div>
       <Suspense>
         <Footer />

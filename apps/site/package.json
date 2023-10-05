@@ -3,21 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "description": "Flexstart - Serverless Kubernetes Platform",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/flexstart-org/flexstart"
-  },
   "author": "Mitesh Gupta <mail@miteshgupta.com> (https://miteshgupta.com)",
-  "bugs": {
-    "url": "https://github.com/flexstart-org/flexstart/issues"
-  },
+  "bugs": "https://github.com/flexstart-org/flexstart/issues",
   "homepage": "https://github.com/flexstart-org/flexstart#readme",
+  "repository": "flexstart-org/flexstart",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@radix-ui/react-accordion": "^1.1.2",
@@ -26,11 +21,11 @@
     "@radix-ui/react-tooltip": "^1.0.6",
     "@stitches/react": "^1.2.8",
     "classnames": "^2.3.2",
-    "clsx": "^1.2.1",
-    "framer-motion": "^10.16.1",
+    "clsx": "^2.0.0",
+    "framer-motion": "^10.16.4",
     "lucide-react": "^0.260.0",
     "mailing-core": "^1.0.1",
-    "next": "^13.4.19",
+    "next": "^13.5.4",
     "nextra": "^2.12.3",
     "nextra-theme-docs": "^2.12.3",
     "nodemailer": "^6.9.4",
@@ -42,18 +37,18 @@
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.4",
-    "@types/node": "^20.5.2",
+    "@tailwindcss/forms": "^0.5.6",
+    "@types/node": "^20.6.0",
     "@types/nodemailer": "^6.4.9",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.10",
     "@types/sitemap-generator": "^8.5.1",
     "autoprefixer": "^10.4.15",
-    "eslint-config-custom": "*",
-    "postcss": "^8.4.29",
+    "eslint-config-custom": "0.0.0",
+    "postcss": "^8.4.31",
     "sitemap-generator": "^8.5.1",
     "tailwindcss": "^3.3.3",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "packageManager": "yarn@1.22.19"
 }

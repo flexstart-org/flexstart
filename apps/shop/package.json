@@ -3,37 +3,37 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "dev": "next dev",
     "lint": "next lint",
     "prebuild": "prisma generate",
-    "predev": "prisma generate"
+    "predev": "prisma generate",
+    "start": "next start"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.15",
+    "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
-    "@prisma/client": "5.3.1",
+    "@prisma/client": "^5.4.1",
     "clsx": "^2.0.0",
     "next": "^13.5.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@tailwindcss/container-queries": "^0.1.1",
-    "@tailwindcss/typography": "^0.5.9",
-    "@types/node": "20.4.4",
-    "@types/react": "18.2.16",
-    "@types/react-dom": "18.2.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/node": "^20.6.0",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.10",
     "@vercel/git-hooks": "^1.0.0",
-    "autoprefixer": "^10.4.14",
-    "eslint": "^8.48.0",
-    "eslint-config-custom": "*",
+    "autoprefixer": "^10.4.15",
+    "eslint": "^8.50.0",
+    "eslint-config-custom": "0.0.0",
     "eslint-plugin-unicorn": "^48.0.0",
     "lint-staged": "^13.2.3",
-    "postcss": "^8.4.29",
-    "prisma": "^5.3.1",
+    "postcss": "^8.4.31",
+    "prisma": "^5.4.1",
     "tailwindcss": "^3.3.3",
-    "typescript": "5.2.2"
+    "typescript": "^5.2.2"
   }
 }
