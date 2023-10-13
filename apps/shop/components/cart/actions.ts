@@ -1,10 +1,18 @@
-'use server';
+"use server";
 
-import { addToCart, createCart, getCart, removeFromCart, updateCart } from 'lib/shopify';
-import { cookies } from 'next/headers';
+import {
+  addToCart,
+  createCart,
+  getCart,
+  removeFromCart,
+  updateCart,
+} from "lib/shopify";
+import { cookies } from "next/headers";
 
-export const addItem = async (variantId: string | undefined): Promise<String | undefined> => {
-  let cartId = cookies().get('cartId')?.value;
+export const addItem = async (
+  variantId: string | undefined
+): Promise<String | undefined> => {
+  let cartId = cookies().get("cartId")?.value;
   let cart;
 
   if (cartId) {
@@ -12,58 +20,71 @@ export const addItem = async (variantId: string | undefined): Promise<String | u
   }
 
   if (!cartId || !cart) {
-    cart = await createCart();
+    let cart = await fetch("https://shop.flexstart.org/api/cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    }).then((res) => res.json());
     cartId = cart.id;
-    cookies().set('cartId', cartId);
+    cookies().set("cartId", cartId!);
   }
 
   if (!variantId) {
-    return 'Missing product variant ID';
+    return "Missing product variant ID";
   }
 
   try {
-    await addToCart(cartId, [{ merchandiseId: variantId, quantity: 1 }]);
+    // const temp = await fetch("http://localhost:3000/api/cart", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     cartId: cartId,
+    //     lines: [{ merchandiseId: variantId, quantity: 1 }],
+    //   }),
+    // }).then((res) => res.json());
+    // await addToCart(cartId, [{ merchandiseId: variantId, quantity: 1 }]);
   } catch (e) {
-    return 'Error adding item to cart';
+    return "Error adding item to cart";
   }
 };
 
-export const removeItem = async (lineId: string): Promise<String | undefined> => {
-  const cartId = cookies().get('cartId')?.value;
+export const removeItem = async (
+  lineId: string
+): Promise<String | undefined> => {
+  const cartId = cookies().get("cartId")?.value;
 
   if (!cartId) {
-    return 'Missing cart ID';
+    return "Missing cart ID";
   }
   try {
     await removeFromCart(cartId, [lineId]);
   } catch (e) {
-    return 'Error removing item from cart';
+    return "Error removing item from cart";
   }
 };
 
 export const updateItemQuantity = async ({
   lineId,
   variantId,
-  quantity
+  quantity,
 }: {
   lineId: string;
   variantId: string;
   quantity: number;
 }): Promise<String | undefined> => {
-  const cartId = cookies().get('cartId')?.value;
+  const cartId = cookies().get("cartId")?.value;
 
   if (!cartId) {
-    return 'Missing cart ID';
+    return "Missing cart ID";
   }
   try {
     await updateCart(cartId, [
       {
         id: lineId,
         merchandiseId: variantId,
-        quantity
-      }
+        quantity,
+      },
     ]);
   } catch (e) {
-    return 'Error updating item quantity';
+    return "Error updating item quantity";
   }
 };

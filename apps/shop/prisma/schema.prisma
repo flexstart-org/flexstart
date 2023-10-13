@@ -6,17 +6,17 @@ datasource db {
 
 generator client {
   provider        = "prisma-client-js"
-  // output          = "../../../node_modules/@prisma/client/shop"
+  output          = "../../../node_modules/@prisma/client/shop"
   previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 model Product {
-  id               String          @id @default(uuid()) @map("_id")
-  handle           String          @unique
+  id               String           @id @default(uuid()) @map("_id")
+  handle           String           @unique
   availableForSale Boolean
   title            String
   description      String
-  descriptionHtml  String?
+  descriptionHtml  String
   options          ProductOption[]
   priceRange       PriceRange
   variants         ProductVariant[]
@@ -24,7 +24,56 @@ model Product {
   images           Image[]
   seo              SEO
   tags             String[]
-  updatedAt        DateTime        @updatedAt
+  updatedAt        DateTime         @updatedAt
+}
+
+type Products {
+  id               String
+  handle           String
+  availableForSale Boolean
+  title            String
+  description      String
+  descriptionHtml  String
+  options          ProductOption[]
+  priceRange       PriceRange
+  variants         ProductVariant[]
+  featuredImage    Image
+  images           Image[]
+  seo              SEO
+  tags             String[]
+  updatedAt        DateTime
+}
+
+model Cart {
+  id            String     @id @default(uuid()) @map("_id")
+  checkoutUrl   String
+  cost          Cost
+  lines         CartItem[]
+  totalQuantity Int
+}
+
+type Cost {
+  subtotalAmount Money
+  totalAmount    Money
+  totalTaxAmount Money
+}
+
+type CartItem {
+  id          String
+  quantity    Int
+  cost        totalAmount
+  merchandise Merchandise
+}
+
+type totalAmount {
+  totalAmount Money
+}
+
+type Merchandise {
+  id              String
+  title           String
+  selectedOptions SelectedOptions[]
+  product         Products
 }
 
 type Image {
@@ -67,3 +116,17 @@ type Money {
   amount       String
   currencyCode String
 }
+
+// type Checkout {
+//   id String
+//   webUrl String
+//   completedAt DateTime
+//   createdAt DateTime
+//   updatedAt DateTime
+//   currencyCode String
+//   taxesIncluded Boolean
+//   lineItems LineItem[]
+//   totalPriceSet TotalPriceSet
+//   subtotalPriceSet TotalPriceSet
+//   totalTaxSet TotalPriceSet
+// }

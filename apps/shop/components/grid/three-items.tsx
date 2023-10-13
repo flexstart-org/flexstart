@@ -1,5 +1,5 @@
 import { GridTileImage } from "components/grid/tile";
-// import type { Product } from "lib/shopify/types";
+import type { Product } from "lib/shopify/types";
 import Link from "next/link";
 
 function ThreeItemGridItem({
@@ -7,7 +7,7 @@ function ThreeItemGridItem({
   size,
   priority,
 }: {
-  item: any;
+  item: Product;
   size: "full" | "half";
   priority?: boolean;
 }) {
@@ -21,10 +21,10 @@ function ThreeItemGridItem({
     >
       <Link
         className="relative block w-full h-full aspect-square"
-        href={`/product/${item?.handle}`}
+        href={`/product/${item.handle}`}
       >
         <GridTileImage
-          src={item?.featuredImage?.url}
+          src={item.featuredImage.url}
           fill
           sizes={
             size === "full"
@@ -32,12 +32,12 @@ function ThreeItemGridItem({
               : "(min-width: 768px) 33vw, 100vw"
           }
           priority={priority}
-          alt={item?.title}
+          alt={item.title}
           label={{
             position: size === "full" ? "center" : "bottom",
-            title: item?.title as string,
-            amount: item?.priceRange.maxVariantPrice?.amount,
-            currencyCode: item?.priceRange.maxVariantPrice?.currencyCode,
+            title: item.title as string,
+            amount: item.priceRange.maxVariantPrice.amount,
+            currencyCode: item.priceRange.maxVariantPrice.currencyCode,
           }}
         />
       </Link>
@@ -46,10 +46,12 @@ function ThreeItemGridItem({
 }
 
 export async function ThreeItemGrid() {
-  const homepageItems = await fetch("https://shop.flexstart.org/api/products", {
-    method: "GET",
-    cache: "no-store",
-  }).then((res) => res.json());
+  const homepageItems = await fetch(
+    "https://shop.flexstart.org/api/products?take=3",
+    {
+      cache: "no-store",
+    }
+  ).then((res) => res.json());
 
   if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
 
