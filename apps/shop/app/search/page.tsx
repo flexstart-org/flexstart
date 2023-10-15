@@ -1,7 +1,7 @@
 import Grid from "components/grid";
 import ProductGridItems from "components/layout/product-grid-items";
 import { defaultSort, sorting } from "lib/constants";
-// import { getProducts } from "lib/shopify";
+import { getProducts } from "lib/shopify";
 
 export const runtime = "edge";
 
@@ -19,13 +19,7 @@ export default async function SearchPage({
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
 
-  const products = await fetch(
-    `https://shop.flexstart.org/api/products?sortKey=${sortKey}&reverse=${reverse}&query=${searchValue}`,
-    {
-      cache: "no-store",
-    }
-  ).then((res) => res.json());
-  // const products = await getProducts({ sortKey, reverse, query: searchValue });
+  const products = await getProducts({ sortKey, reverse, query: searchValue });
   const resultsText = products.length > 1 ? "results" : "result";
 
   return (

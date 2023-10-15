@@ -1,15 +1,13 @@
-import { NextRequest } from "next/server";
 import prisma from "lib/prisma";
 
-export async function GET(req: NextRequest) {
-  const handle = req.nextUrl.searchParams.get("handle");
-  const take = req.nextUrl.searchParams.get("take");
-  const skip = req.nextUrl.searchParams.get("skip");
-  const sortKey = req.nextUrl.searchParams.get("sortKey");
-  const reverse = req.nextUrl.searchParams.get("reverse");
-  const query = req.nextUrl.searchParams.get("query");
-
-  // console.log(take, sortKey, reverse, query);
+export async function GET(req: Request) {
+  const searchParams = new URL(req.url).searchParams;
+  const handle = searchParams.get("handle");
+  const take = searchParams.get("take");
+  const skip = searchParams.get("skip");
+  const sortKey = searchParams.get("sortKey");
+  const reverse = searchParams.get("reverse");
+  const query = searchParams.get("query");
 
   if (handle) {
     const products = await prisma.product.findUnique({
@@ -119,9 +117,29 @@ export async function GET(req: NextRequest) {
 
       return Response.json(products);
     } else {
-      const products = await prisma.product.findMany({
-        take: take ? Number(take) : undefined,
-      });
+      const products =
+        query === "undefined"
+          ? await prisma.product.findMany({
+              take: take ? Number(take) : undefined,
+            })
+          : await prisma.product.findMany({
+              where: {
+                OR: [
+                  {
+                    title: {
+                      contains: query!,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    description: {
+                      contains: query!,
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+              },
+            });
 
       return Response.json(products);
     }

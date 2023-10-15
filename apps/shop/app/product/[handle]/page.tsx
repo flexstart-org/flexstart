@@ -5,44 +5,36 @@ import { Suspense } from "react";
 import Footer from "components/layout/footer";
 import { Gallery } from "components/product/gallery";
 import { ProductDescription } from "components/product/product-description";
-// import { HIDDEN_PRODUCT_TAG } from "lib/constants";
-// import { getProduct, getProductRecommendations } from "lib/shopify";
+import { HIDDEN_PRODUCT_TAG } from "lib/constants";
+import { getProduct, getProductRecommendations } from "lib/shopify";
 import { Image } from "lib/shopify/types";
 // import Link from "next/link";
-// import prisma from "lib/prisma";
 
-// export const runtime = 'edge';
+export const runtime = "edge";
 
 export async function generateMetadata({
   params,
 }: {
   params: { handle: string };
 }): Promise<Metadata> {
-  const product = await fetch(
-    `https://shop.flexstart.org/api/products?handle=${params.handle}`
-  ).then((res) => res.json());
-  // const product = await prisma.product.findUnique({
-  //   where: {
-  //     handle: params.handle,
-  //   },
-  // });
+  const product = await getProduct(params.handle);
 
   if (!product) return notFound();
 
   const { url, width, height, altText: alt } = product?.featuredImage || {};
-  // const indexable = !product.tags?.includes(HIDDEN_PRODUCT_TAG);
+  const indexable = !product.tags.includes(HIDDEN_PRODUCT_TAG);
 
   return {
     title: product.seo?.title || product.title,
     description: product.seo?.description || product.description,
-    // robots: {
-    //   index: indexable,
-    //   follow: indexable,
-    //   googleBot: {
-    //     index: indexable,
-    //     follow: indexable,
-    //   },
-    // },
+    robots: {
+      index: indexable,
+      follow: indexable,
+      googleBot: {
+        index: indexable,
+        follow: indexable,
+      },
+    },
     openGraph: url
       ? {
           images: [
@@ -63,11 +55,7 @@ export default async function ProductPage({
 }: {
   params: { handle: string };
 }) {
-  // const product = await getProduct(params.handle);
-  const product = await fetch(
-    `https://shop.flexstart.org/api/products?handle=${params.handle}`,
-    { method: "GET", cache: "no-store" }
-  ).then((res) => res.json());
+  const product = await getProduct(params.handle);
 
   if (!product) return notFound();
 

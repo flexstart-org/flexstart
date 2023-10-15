@@ -14,52 +14,65 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const data = await req.json();
-  console.log(data);
+  const { cartId, lines } = await req.json();
 
-  if (data) {
+  if (cartId && lines.length > 0) {
     const product = await prisma.product.findFirst({
       where: {
-        variants: { some: { id: data.lines[0].merchandiseId } },
+        variants: {
+          some: {
+            id: lines[0].merchandiseId,
+          },
+        },
       },
     });
-    
+
+    const variant = product?.variants.find(
+      (variant) => variant.id === lines[0].merchandiseId
+    );
+
+    const cartItems = await prisma.cart.findUnique({
+      where: {
+        id: cartId,
+      },
+    });
+
+    const amount =
+      Number(cartItems?.cost.totalAmount.amount) +
+      Number(variant?.price.amount);
+
     const cart = await prisma.cart.update({
       where: {
-        id: data.cartId,
+        id: cartId,
       },
       data: {
         cost: {
-          subtotalAmount: {
-            amount: "",
-            currencyCode: "",
-          },
-          totalAmount: {
-            amount: product?.variants[0]?.price.amount!,
-            currencyCode: data.cost.totalAmount.currencyCode,
-          },
-          totalTaxAmount: {
-            amount: "",
-            currencyCode: "",
+          update: {
+            totalAmount: {
+              amount: String(amount),
+              currencyCode: variant?.price.currencyCode!,
+            },
           },
         },
         lines: {
-          id: randomUUID(),
-          quantity: data.lines[0].quantity,
-          cost: {
-            totalAmount: {
-              amount: product?.variants[0]?.price.amount!,
-              currencyCode: product?.variants[0]?.price.currencyCode!,
+          push: {
+            id: randomUUID(),
+            quantity: lines[0].quantity,
+            cost: {
+              totalAmount: {
+                amount: variant?.price.amount!,
+                currencyCode: variant?.price.currencyCode!,
+              },
+            },
+            merchandise: {
+              id: variant?.id!,
+              title: variant?.title!,
+              selectedOptions: variant?.selectedOptions,
+              product: product!,
             },
           },
-          merchandise: {
-            id: data.lines[0].merchandiseId,
-            title: product?.variants[0]?.title!,
-            selectedOptions: product?.variants[0]?.selectedOptions,
-            product: product!,
-          },
         },
-        totalQuantity: {increment: data.lines[0].quantity},
+        totalQuantity: { increment: lines[0].quantity },
       },
     });
 
@@ -70,20 +83,19 @@ export async function POST(req: Request) {
         checkoutUrl: "",
         cost: {
           subtotalAmount: {
-            amount: "",
-            currencyCode: "",
+            amount: "0",
+            currencyCode: "USD",
           },
           totalAmount: {
-            amount: "",
-            currencyCode: "",
+            amount: "0",
+            currencyCode: "USD",
           },
           totalTaxAmount: {
-            amount: "",
-            currencyCode: "",
+            amount: "0",
+            currencyCode: "USD",
           },
         },
         lines: [],
-        totalQuantity: 0,
       },
     });
 
@@ -91,6 +103,120 @@ export async function POST(req: Request) {
   }
 }
 
-export async function PATCH(req: Request) {}
+export async function PATCH(req: Request) {
+  const { cartId, type, lines } = await req.json();
 
-export async function DELETE(req: Request) {}
+  const product = await prisma.product.findFirst({
+    where: {
+      variants: {
+        some: {
+          id: lines[0].merchandiseId,
+        },
+      },
+    },
+  });
+
+  const variant = product?.variants.find(
+    (variant) => variant.id === lines[0].merchandiseId
+  );
+
+  const cartItems = await prisma.cart.findUnique({
+    where: {
+      id: cartId,
+    },
+  });
+
+  const amount =
+    type === "plus"
+      ? Number(cartItems?.cost.totalAmount.amount) +
+        Number(variant?.price.amount)
+      : Number(cartItems?.cost.totalAmount.amount) -
+        Number(variant?.price.amount);
+
+  const cart = await prisma.cart.update({
+    where: {
+      id: cartId,
+    },
+    data: {
+      totalQuantity: { increment: type === "plus" ? 1 : -1 },
+      cost: {
+        update: {
+          totalAmount: {
+            update: {
+              amount: String(amount),
+            },
+          },
+        },
+      },
+      lines: {
+        updateMany: {
+          where: {
+            id: {
+              in: lines.map((line: any) => line.id),
+            },
+          },
+          data: {
+            quantity: lines[0].quantity,
+            cost: {
+              update: {
+                totalAmount: {
+                  update: {
+                    amount: String(
+                      Number(variant?.price.amount) * lines[0].quantity
+                    ),
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+
+  return Response.json(cart);
+}
+
+export async function DELETE(req: Request) {
+  const { cartId, lineIds } = await req.json();
+
+  const cartItems = await prisma.cart.findUnique({
+    where: {
+      id: cartId,
+    },
+  });
+
+  const line = cartItems?.lines.find((line) => line.id === lineIds[0]);
+  const amount =
+    Number(cartItems?.cost.totalAmount.amount) -
+    Number(line?.cost.totalAmount.amount);
+
+  const cart = await prisma.cart.update({
+    where: {
+      id: cartId,
+    },
+    data: {
+      totalQuantity: { decrement: line?.quantity },
+      cost: {
+        update: {
+          totalAmount: {
+            update: {
+              amount: String(amount),
+            },
+          },
+        },
+      },
+      lines: {
+        deleteMany: {
+          where: {
+            id: {
+              in: lineIds.map((lineId: string) => lineId),
+            },
+          },
+        },
+      },
+    },
+  });
+
+  return Response.json(cart);
+}

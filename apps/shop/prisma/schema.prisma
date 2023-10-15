@@ -49,7 +49,7 @@ model Cart {
   checkoutUrl   String
   cost          Cost
   lines         CartItem[]
-  totalQuantity Int
+  totalQuantity Int        @default(0)
 }
 
 type Cost {
