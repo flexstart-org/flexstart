@@ -24,16 +24,16 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
   return (
     <footer className="pb-[env(safe-area-inset-bottom)] relative dark:bg-[#111111] bg-[#FAFAFA] backdrop-blur-lg">
       <div className="absolute top-0 h-12 w-full -translate-y-full bg-gradient-to-t from-[#FAFAFA] to-transparent dark:from-black pointer-events-none" />
-      <div
+      {/* <div
         className={`mx-auto max-w-[90rem] py-2 px-4 flex gap-2 ${
           menu ? "flex" : "hidden"
         }`}
       >
         <ThemeSwitch />
-      </div>
+      </div> */}
       <hr className="dark:border-neutral-800" />
       <MaxWidthWrapper className="py-10">
-        <div className="xl:grid xl:grid-cols-5 xl:gap-8">
+        <div className="px-5 xl:px-0 xl:grid xl:grid-cols-5 xl:gap-8">
           <div className="space-y-8 xl:col-span-2">
             <Link href="/">
               <span className="sr-only">Flexstart Logo</span>

@@ -146,10 +146,14 @@ const config: DocsThemeConfig = {
     );
   },
   toc: {
+    title: "On This Page",
+    float: true,
     backToTop: true,
     extraContent: (
-      <div className="h-56 w-52">
-        <Adsense />
+      <div className="relative">
+        <div className="absolute top-0 left-0 h-60 w-52">
+          <Adsense />
+        </div>
       </div>
     ),
   },
