@@ -1,8 +1,27 @@
-import { Cards, Card } from "nextra/components";
+import { Cards } from "nextra/components";
 
 # Courses
 
-<Cards>
-  <Card title="Next.js" href="/courses/nextjs" />
-  <Card title="JavaScript" href="/courses/javascript" />
+export const courses = [
+  {
+    title: "Next.js",
+    href: "/courses/nextjs",
+    image:
+      "https://res.cloudinary.com/practicaldev/image/fetch/s--X9Ev7eRd--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ql92zpsre2li58mpjpsa.png",
+    description: "Learn how to build a Next.js app",
+  },
+  {
+    title: "JavaScript",
+    href: "/courses/javascript",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Javascript.jpg",
+    description: "Learn the fundamentals of JavaScript",
+  },
+];
+
+<Cards num={2}>
+  {courses.map((course) => (
+    <Cards.Card image title={course.title} href={course.href}>
+      <img src={course.image} className="h-56 object-cover" />
+    </Cards.Card>
+  ))}
 </Cards>

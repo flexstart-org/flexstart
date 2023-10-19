@@ -150,7 +150,7 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
           </div>
         </div>
         <div className="pt-8 mt-16 border-t border-gray-900/10 dark:border-neutral-800 sm:mt-20 lg:mt-24">
-          <p className="text-sm leading-5 text-gray-500 dark:text-[#888888]">
+          <p className="px-5 xl:px-0 text-sm leading-5 text-gray-500 dark:text-[#888888]">
             © {new Date().getFullYear()} Flexstart.org. All rights reserved.
           </p>
         </div>

@@ -1,33 +1,38 @@
+import { Cards } from "nextra/components";
+
 # Blog
 
-import { Cards, Card } from "nextra/components";
+export const blog = [
+  {
+    title: "Install Ubuntu desktop 23.04",
+    href: "/blog/install-ubuntu-desktop-23-04",
+    image:
+      "https://ubuntucommunity.s3.dualstack.us-east-2.amazonaws.com/original/3X/4/a/4aaac2cedd0c28af64161a6d8570d66ebbb7dc94.jpeg",
+  },
+  {
+    title: "What is Kubernetes",
+    href: "/blog/what-is-kubernetes",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/247px-Kubernetes_logo_without_workmark.svg.png",
+  },
+  {
+    title: "How to install Ubuntu Desktop on Raspberry Pi 4",
+    href: "/blog/how-to-install-ubuntu-desktop-on-raspberry-pi",
+    image: "https://m.media-amazon.com/images/I/61C1t50ieIL._SX342_.jpg",
+  },
+  {
+    title:
+      "10 Habits to Achieve a Better Work-Life Balance in Today's Fast-Paced World",
+    href: "/blog/10-habits-to-achieve-a-better-work-life-balance-in-todays-fast-paced-world",
+    image:
+      "https://t3.ftcdn.net/jpg/02/78/31/56/360_F_278315689_2B7uduh34eZrpqmwmfDYSab5irXjiw3b.jpg",
+  },
+];
 
 <Cards num={2}>
-  <Card
-    image
-    arrow
-    title="Install Ubuntu desktop 23.04"
-    href="/blog/install-ubuntu-desktop-23-04"
-  >
-    {/* <>![How to install Ubuntu Desktop on Raspberry Pi 4](/assets/blog/10-habits-to-achieve-a-better-work-life-balance-in-todays-fast-paced-world.png)</> */}
-  </Card>
-  <Card image arrow title="What is Kubernetes" href="/blog/what-is-kubernetes">
-    {/* <>![What is Kubernetes](/assets/blog/what-is-kubernetes.png)</> */}
-  </Card>
-  <Card
-    image
-    arrow
-    title="How to install Ubuntu Desktop on Raspberry Pi 4"
-    href="/blog/how-to-install-ubuntu-desktop-on-raspberry-pi"
-  >
-    {/* <>![How to install Ubuntu Desktop on Raspberry Pi 4](/assets/blog/how-to-install-ubuntu-desktop-on-raspberry-pi.png)</> */}
-  </Card>
-  <Card
-    image
-    arrow
-    title="10 Habits to Achieve a Better Work-Life Balance in Today's Fast-Paced World"
-    href="/blog/10-habits-to-achieve-a-better-work-life-balance-in-todays-fast-paced-world"
-  >
-    {/* <>![How to install Ubuntu Desktop on Raspberry Pi 4](/assets/blog/10-habits-to-achieve-a-better-work-life-balance-in-todays-fast-paced-world.png)</> */}
-  </Card>
+  {blog.map((item) => (
+    <Cards.Card image arrow title={item.title} href={item.href}>
+      <img src={item.image} className="h-56 object-cover" />
+    </Cards.Card>
+  ))}
 </Cards>
