@@ -16,6 +16,9 @@ export async function POST(req: Request) {
   const send = await fetch("https://dash.flexstart.org/api/form", {
     method: "POST",
     cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data),
   });
 
