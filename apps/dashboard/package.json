@@ -83,7 +83,7 @@
     "@types/uuid": "^9.0.0",
     "array-to-ndjson": "^1.0.1",
     "autoprefixer": "^10.4.15",
-    "eslint-config-custom": "0.0.0",
+    "eslint-config-custom": "*",
     "mailing": "^1.0.1",
     "postcss": "^8.4.31",
     "prisma": "^5.4.1",

