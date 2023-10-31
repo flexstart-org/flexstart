@@ -148,7 +148,7 @@ const config: DocsThemeConfig = {
   toc: {
     title: "On This Page",
     float: true,
-    backToTop: true,
+    // backToTop: true,
     extraContent: (
       <div className="relative w-full h-56">
         <div className="absolute w-full h-56">

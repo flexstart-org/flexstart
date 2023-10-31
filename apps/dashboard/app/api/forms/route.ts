@@ -2,9 +2,13 @@ import prisma from "lib/prisma";
 
 export async function GET(req: Request) {
   const token = req.headers.get("Authorization");
+  const query = new URL(req.url).searchParams;
+  const skip = query.get("skip");
 
   if (token === "f828879746fa11fe403956577d150d08") {
     const data = await prisma.forms.findMany({
+      skip: Number(skip),
+      take: 25,
       orderBy: {
         createdAt: "desc",
       },
