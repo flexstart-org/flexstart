@@ -150,8 +150,8 @@ const config: DocsThemeConfig = {
     float: true,
     // backToTop: true,
     extraContent: (
-      <div className="relative w-full h-56">
-        <div className="absolute w-full h-56">
+      <div className="relative w-full h-96">
+        <div className="absolute w-full h-96">
           <Adsense />
         </div>
       </div>
