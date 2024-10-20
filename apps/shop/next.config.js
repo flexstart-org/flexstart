@@ -3,7 +3,14 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { domains: ["static.flexstart.org"] },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "static.flexstart.org",
+      },
+    ],
+  },
   async redirects() {
     return [];
   },
