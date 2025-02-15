@@ -20,7 +20,7 @@ export default function Tooltip({
   fullWidth?: boolean;
 }) {
   const [openTooltip, setOpenTooltip] = useState(false);
-  const mobileTooltipRef = useRef(null);
+  const mobileTooltipRef = useRef<HTMLDivElement>(null);
 
   const controls = useAnimation();
   const transitionProps = { type: "spring", stiffness: 500, damping: 30 };
@@ -28,8 +28,8 @@ export default function Tooltip({
   async function handleDragEnd(_, info) {
     const offset = info.offset.y;
     const velocity = info.velocity.y;
-    const height = mobileTooltipRef.current.getBoundingClientRect().height;
-    if (offset > height / 2 || velocity > 800) {
+    const height = mobileTooltipRef.current?.getBoundingClientRect().height;
+    if (offset > height! / 2 || velocity > 800) {
       await controls.start({ y: "100%", transition: transitionProps });
       setOpenTooltip(false);
     } else {
@@ -52,7 +52,7 @@ export default function Tooltip({
             <motion.div
               ref={mobileTooltipRef}
               key="mobile-tooltip"
-              className="group fixed inset-x-0 bottom-0 z-40 w-screen cursor-grab active:cursor-grabbing sm:hidden"
+              className="fixed inset-x-0 bottom-0 z-40 w-screen group cursor-grab active:cursor-grabbing sm:hidden"
               initial={{ y: "100%" }}
               animate={{
                 y: openTooltip ? 0 : "100%",
@@ -69,12 +69,12 @@ export default function Tooltip({
               <div
                 className={`rounded-t-4xl -mb-1 flex h-7 w-full items-center justify-center border-t border-gray-200 bg-white`}
               >
-                <div className="-mr-1 h-1 w-6 rounded-full bg-gray-300 transition-all group-active:rotate-12" />
-                <div className="h-1 w-6 rounded-full bg-gray-300 transition-all group-active:-rotate-12" />
+                <div className="w-6 h-1 -mr-1 transition-all bg-gray-300 rounded-full group-active:rotate-12" />
+                <div className="w-6 h-1 transition-all bg-gray-300 rounded-full group-active:-rotate-12" />
               </div>
               <div className="flex min-h-[150px] w-full items-center justify-center overflow-hidden bg-white align-middle shadow-xl">
                 {typeof content === "string" ? (
-                  <span className="block max-w-xs text-center text-sm text-gray-700">
+                  <span className="block max-w-xs text-sm text-center text-gray-700">
                     {content}
                   </span>
                 ) : (
@@ -101,19 +101,19 @@ export default function Tooltip({
           <TooltipPrimitive.Content
             sideOffset={4}
             side="top"
-            className="z-30 hidden animate-slide-up-fade items-center overflow-hidden rounded-md border border-gray-200 bg-white drop-shadow-lg sm:block"
+            className="z-30 items-center hidden overflow-hidden bg-white border border-gray-200 rounded-md animate-slide-up-fade drop-shadow-lg sm:block"
           >
-            <TooltipPrimitive.Arrow className="fill-current text-white" />
+            <TooltipPrimitive.Arrow className="text-white fill-current" />
             {typeof content === "string" ? (
               <div className="p-5">
-                <span className="block max-w-xs text-center text-sm text-gray-700">
+                <span className="block max-w-xs text-sm text-center text-gray-700">
                   {content}
                 </span>
               </div>
             ) : (
               content
             )}
-            <TooltipPrimitive.Arrow className="fill-current text-white" />
+            <TooltipPrimitive.Arrow className="text-white fill-current" />
           </TooltipPrimitive.Content>
         </TooltipPrimitive.Root>
       </TooltipPrimitive.Provider>
@@ -131,7 +131,7 @@ export function TooltipContent({
   ctaLink?: string;
 }) {
   return (
-    <div className="flex max-w-xs flex-col items-center space-y-3 p-5 text-center">
+    <div className="flex flex-col items-center max-w-xs p-5 space-y-3 text-center">
       <p className="text-sm text-gray-700">{title}</p>
       {cta && ctaLink && (
         <Link
@@ -147,7 +147,7 @@ export function TooltipContent({
 
 export function OGImageProxy() {
   return (
-    <div className="flex max-w-md flex-col items-center space-y-5 p-5 text-center">
+    <div className="flex flex-col items-center max-w-md p-5 space-y-5 text-center">
       <BlurImage
         alt="Demo GIF for OG Image Proxy"
         src="https://res.cloudinary.com/dubdotsh/image/upload/v1664425639/og-image-proxy-demo.gif"
@@ -164,32 +164,32 @@ export function OGImageProxy() {
   );
 }
 
-export function ProTiers({ usageLimit }: { usageLimit?: number }) {
+export function ProTiers({ usageLimit }: { usageLimit: number }) {
   const [tier, setTier] = useState(
     usageLimit > 1000 ? PRO_TIERS.map((t) => t.quota).indexOf(usageLimit) : 0
   );
 
   return (
     <div className="w-full rounded-md">
-      <div className="flex w-full max-w-md items-center justify-between p-5">
-        <h3 className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-2xl text-transparent">
-          {PRO_TIERS[tier].name}
+      <div className="flex items-center justify-between w-full max-w-md p-5">
+        <h3 className="text-2xl text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text">
+          {PRO_TIERS[tier]?.name}
         </h3>
         <div className="flex items-center">
           <p className="text-2xl font-semibold text-gray-700">
-            ${PRO_TIERS[tier].price.monthly.amount}
+            ${PRO_TIERS[tier]?.price.monthly.amount}
           </p>
           <p className="text-sm text-gray-700">/mo</p>
         </div>
       </div>
-      <div className="flex w-full flex-col items-center space-y-1 border-t border-gray-200 bg-gray-50 p-5 text-center">
+      <div className="flex flex-col items-center w-full p-5 space-y-1 text-center border-t border-gray-200 bg-gray-50">
         <Slider
           value={tier}
           setValue={setTier}
           maxValue={PRO_TIERS.length - 1}
         />
         <p className="text-sm text-gray-700">
-          Up to {nFormatter(PRO_TIERS[tier].quota)} link clicks/mo
+          Up to {nFormatter(PRO_TIERS[tier]?.quota ?? 0)} link clicks/mo
         </p>
       </div>
     </div>

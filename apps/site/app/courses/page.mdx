@@ -20,7 +20,7 @@ export const courses = [
 
 <Cards num={2}>
   {courses.map((course) => (
-    <Cards.Card image title={course.title} href={course.href}>
+    <Cards.Card key={course.href} title={course.title} href={course.href}>
       <img src={course.image} className="h-56 object-cover" />
     </Cards.Card>
   ))}

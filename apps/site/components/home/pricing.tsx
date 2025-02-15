@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import Confetti from "react-dom-confetti";
-import { MinusCircle } from "lucide-react";
+// import { MinusCircle } from "lucide-react";
 import {
   CheckCircleFill,
   QuestionCircle,
@@ -98,9 +98,9 @@ const Pricing = () => {
   return (
     <MaxWidthWrapper className="my-20 text-center">
       <div id="pricing" className="mx-auto my-10 sm:max-w-lg">
-        <h2 className="font-display text-4xl font-extrabold text-black sm:text-5xl">
+        <h2 className="text-4xl font-extrabold text-black font-display sm:text-5xl">
           Simple,{" "}
-          <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+          <span className="text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text">
             usage-based
           </span>{" "}
           pricing
@@ -110,7 +110,7 @@ const Pricing = () => {
         </p>
       </div>
 
-      <div className="relative mx-auto mb-14 flex max-w-fit items-center space-x-2">
+      <div className="relative flex items-center mx-auto space-x-2 mb-14 max-w-fit">
         <p className="text-gray-600">Billed Monthly</p>
         <Confetti
           active={period === "yearly"}
@@ -151,28 +151,31 @@ const Pricing = () => {
                 } shadow-lg`}
               >
                 {plan === "Pro" && (
-                  <div className="absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 px-3 py-2 text-sm font-medium text-white">
+                  <div className="absolute left-0 right-0 w-32 px-3 py-2 mx-auto text-sm font-medium text-white rounded-full -top-5 bg-gradient-to-r from-blue-600 to-cyan-600">
                     Popular
                   </div>
                 )}
 
                 <div className="p-5">
-                  <h3 className="my-3 text-center font-display text-3xl font-bold">
+                  <h3 className="my-3 text-3xl font-bold text-center font-display">
                     {plan}
                   </h3>
                   <p className="text-gray-500">{tagline}</p>
                   {plan === "Enterprise" ? (
-                    <p className="my-5 font-display text-6xl font-semibold">
+                    <p className="my-5 text-6xl font-semibold font-display">
                       Custom
                     </p>
                   ) : (
-                    <div className="my-5 flex justify-center">
-                      <p className="font-display text-6xl font-semibold">
+                    <div className="flex justify-center my-5">
+                      <p className="text-6xl font-semibold font-display">
                         $
                         {plan === "Pro"
                           ? period === "yearly"
-                            ? nFormatter(PRO_TIERS[tier].price.yearly.amount, 1)
-                            : PRO_TIERS[tier].price.monthly.amount
+                            ? nFormatter(
+                                PRO_TIERS[tier]?.price.yearly.amount ?? 0,
+                                1
+                              )
+                            : PRO_TIERS[tier]?.price.monthly.amount
                           : 0}
                       </p>
                     </div>
@@ -182,7 +185,7 @@ const Pricing = () => {
                     {period === "yearly" ? "per year" : "per month"}
                   </p>
                 </div>
-                <div className="flex h-20 items-center justify-center border-t border-b border-gray-200 bg-gray-50">
+                <div className="flex items-center justify-center h-20 border-t border-b border-gray-200 bg-gray-50">
                   {plan === "Pro" ? (
                     <div className="flex flex-col items-center space-y-1">
                       <Slider
@@ -192,11 +195,11 @@ const Pricing = () => {
                       />
                       <div className="flex items-center">
                         <p className="text-sm text-gray-600">
-                          {nFormatter(PRO_TIERS[tier].quota)} pods/mo
+                          {nFormatter(PRO_TIERS[tier]?.quota ?? 0)} pods/mo
                         </p>
                         <Tooltip content="No. of pods you can run in a month.">
-                          <div className="flex h-4 w-6 justify-center">
-                            <QuestionCircle className="h-4 w-4 text-gray-600" />
+                          <div className="flex justify-center w-6 h-4">
+                            <QuestionCircle className="w-4 h-4 text-gray-600" />
                           </div>
                         </Tooltip>
                       </div>
@@ -205,14 +208,14 @@ const Pricing = () => {
                     <div className="flex items-center">
                       <p className="text-gray-600">{quota}</p>
                       <Tooltip content="No. of pods you can run in a month">
-                        <div className="flex h-4 w-8 justify-center">
-                          <QuestionCircle className="h-4 w-4 text-gray-600" />
+                        <div className="flex justify-center w-8 h-4">
+                          <QuestionCircle className="w-4 h-4 text-gray-600" />
                         </div>
                       </Tooltip>
                     </div>
                   )}
                 </div>
-                <ul className="my-10 space-y-5 px-8">
+                <ul className="px-8 my-10 space-y-5">
                   {features.map(({ text, footnote, negative }) => (
                     <li key={text} className="flex space-x-5">
                       <div className="flex-shrink-0">
@@ -220,13 +223,13 @@ const Pricing = () => {
                           // neutral ? (
                           //   <MinusCircle
                           //     fill="#D4D4D8"
-                          //     className="h-6 w-6 text-white"
+                          //     className="w-6 h-6 text-white"
                           //   />
                           // ) :
                           negative ? (
-                            <XCircleFill className="h-6 w-6 text-gray-300" />
+                            <XCircleFill className="w-6 h-6 text-gray-300" />
                           ) : (
-                            <CheckCircleFill className="h-6 w-6 text-green-500" />
+                            <CheckCircleFill className="w-6 h-6 text-green-500" />
                           )
                         }
                       </div>
@@ -240,8 +243,8 @@ const Pricing = () => {
                             {text}
                           </p>
                           <Tooltip content={footnote}>
-                            <div className="flex h-4 w-8 justify-center">
-                              <QuestionCircle className="h-4 w-4 text-gray-600" />
+                            <div className="flex justify-center w-8 h-4">
+                              <QuestionCircle className="w-4 h-4 text-gray-600" />
                             </div>
                           </Tooltip>
                         </div>
