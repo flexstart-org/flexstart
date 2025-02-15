@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ThemeSwitch } from "nextra-theme-docs";
+// import { ThemeSwitch } from "nextra-theme-docs";
 import { ReactElement } from "react";
 import { Github, LinkedIn, Logo, Twitter } from "@/components/shared/icons";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
@@ -23,7 +23,7 @@ const navigation = {
 export default function Footer({ menu }: { menu?: boolean }): ReactElement {
   return (
     <footer className="pb-[env(safe-area-inset-bottom)] relative dark:bg-[#111111] bg-[#FAFAFA] backdrop-blur-lg">
-      <div className="absolute top-0 h-12 w-full -translate-y-full bg-gradient-to-t from-[#FAFAFA] to-transparent dark:from-black pointer-events-none" />
+      {/* <div className="absolute top-0 h-12 w-full -translate-y-full bg-gradient-to-t from-[#FAFAFA] to-transparent dark:from-black pointer-events-none" /> */}
       {/* <div
         className={`mx-auto max-w-[90rem] py-2 px-4 flex gap-2 ${
           menu ? "flex" : "hidden"
@@ -39,7 +39,7 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
               <span className="sr-only">Flexstart Logo</span>
               <Logo className="dark:text-white h-7 w-7" />
             </Link>
-            <p className="max-w-xs text-sm text-gray-500 dark:text-white">
+            <p className="max-w-xs mt-2 text-sm text-gray-500 dark:text-white">
               Run and scale containerized applications.
             </p>
             <div className="flex items-center space-x-2">
@@ -47,7 +47,7 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
                 href="https://twitter.com/flexstart_org"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 transition-colors rounded-md hover:bg-gray-100 active:bg-gray-200"
+                className="p-2 transition-colors rounded-md hover:bg-gray-500 active:bg-gray-200"
               >
                 <span className="sr-only">Twitter</span>
                 <Twitter className="w-5 h-5 text-gray-600 dark:text-white" />
@@ -57,7 +57,7 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
                 href="https://github.com/flexstart-org"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 transition-colors rounded-md hover:bg-gray-100 active:bg-gray-200"
+                className="p-2 transition-colors rounded-md hover:bg-gray-500 active:bg-gray-200"
               >
                 <span className="sr-only">Github</span>
                 <Github className="w-5 h-5 text-gray-600 dark:text-white" />
@@ -67,7 +67,7 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
                 href="https://www.linkedin.com/company/flexstart"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 transition-colors rounded-md hover:bg-gray-100 active:bg-gray-200"
+                className="p-2 transition-colors rounded-md hover:bg-gray-500 active:bg-gray-200"
               >
                 <span className="sr-only">LinkedIn</span>
                 <LinkedIn className="w-5 h-5" fill="#52525B" />
@@ -85,7 +85,7 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm text-gray-500 hover:text-gray-900 dark:text-[#888888]"
+                        className="text-sm text-gray-500 hover:text-gray-400 dark:text-[#888888]"
                       >
                         {item.name}
                       </Link>
@@ -102,7 +102,7 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm text-gray-500 hover:text-gray-900 dark:text-[#888888]"
+                        className="text-sm text-gray-500 hover:text-gray-400 dark:text-[#888888]"
                       >
                         {item.name}
                       </Link>
@@ -121,7 +121,7 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm text-gray-500 hover:text-gray-900 dark:text-[#888888]"
+                        className="text-sm text-gray-500 hover:text-gray-400 dark:text-[#888888]"
                       >
                         {item.name}
                       </Link>
@@ -138,7 +138,7 @@ export default function Footer({ menu }: { menu?: boolean }): ReactElement {
                     <li key={item.name}>
                       <Link
                         href={item.href}
-                        className="text-sm text-gray-500 hover:text-gray-900 dark:text-[#888888]"
+                        className="text-sm text-gray-500 hover:text-gray-400 dark:text-[#888888]"
                       >
                         {item.name}
                       </Link>

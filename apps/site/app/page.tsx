@@ -1,14 +1,19 @@
----
-title: Flexstart – Serverless Kubernetes platform
----
-
-import Link from "next/link";
+// import Link from "next/link";
+import type { Metadata } from "next";
 import Hero from "@/components/home/hero";
 import Logos from "@/components/home/logos";
 import Features from "@/components/home/features";
-import Testimonials from "@/components/home/testimonials";
-import Pricing from "@/components/home/pricing";
-import Background from "@/components/shared/background";
+// import Testimonials from "@/components/home/testimonials";
+// import Pricing from "@/components/home/pricing";
+// import Background from "@/components/shared/background";
+
+export const metadata: Metadata = {
+  title: "Flexstart – Serverless Kubernetes platform",
+  description:
+    "Flexstart is a serverless container orchestration platform that removes the operational overhead of scaling, patching, securing, and managing servers and lets you focus on building applications.",
+  keywords:
+    "flexstart, serverless kubernetes platform, serverless, docker, kubernetes, k8s, docker container, container orchestration, hosting, container hosting",
+};
 
 export default function Home() {
   const stats = [
@@ -24,12 +29,12 @@ export default function Home() {
         <Logos />
         <Features />
         <div className="pb-24 sm:pb-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <dl className="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+          <div className="px-6 mx-auto max-w-7xl lg:px-8">
+            <dl className="grid grid-cols-1 text-center gap-x-8 gap-y-16 lg:grid-cols-3">
               {stats.map((stat) => (
                 <div
                   key={stat.id}
-                  className="mx-auto flex max-w-xs flex-col gap-y-4"
+                  className="flex flex-col max-w-xs mx-auto gap-y-4"
                 >
                   <dt className="text-base leading-7 text-gray-600">
                     {stat.name}

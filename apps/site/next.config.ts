@@ -1,18 +1,16 @@
 import nextra from "nextra";
 
 const withNextra = nextra({
-  theme: "nextra-theme-docs",
-  themeConfig: "./theme.config.tsx",
   staticImage: true,
   latex: true,
-  flexsearch: {
+  search: {
     codeblocks: false,
   },
   defaultShowCopyCode: true,
   readingTime: true,
 });
 
-const nextConfig = withNextra({
+export default withNextra({
   reactStrictMode: true,
   images: {
     domains: ["pbs.twimg.com"],
@@ -32,5 +30,3 @@ const nextConfig = withNextra({
     ];
   },
 });
-
-export default nextConfig;

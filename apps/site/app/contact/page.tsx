@@ -1,7 +1,7 @@
-# Contact Us
+"use client";
 
 import { useState } from "react";
-import { Switch } from "@headlessui/react";
+import { Switch, Label, Field } from "@headlessui/react";
 import toast from "react-hot-toast";
 import { LoadingDots } from "@/components/shared/icons";
 
@@ -14,7 +14,7 @@ export default function Contact() {
     lastname: "",
     company: "",
     email: "",
-    number: null,
+    number: "",
     message: "",
   });
 
@@ -25,7 +25,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="isolate bg-white px-6 py-8 sm:py-8 lg:px-8">
+    <div className="px-6 py-8 bg-white isolate sm:py-8 lg:px-8">
       <div
         className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
         aria-hidden="true"
@@ -38,7 +38,7 @@ export default function Contact() {
           }}
         />
       </div>
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="max-w-2xl mx-auto text-center">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Contact Us
         </h2>
@@ -66,7 +66,7 @@ export default function Contact() {
             message: "",
           });
         }}
-        className="mx-auto mt-16 max-w-xl sm:mt-20"
+        className="max-w-xl mx-auto mt-16 sm:mt-20"
       >
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
@@ -168,6 +168,7 @@ export default function Contact() {
                 name="phone-number"
                 id="phone-number"
                 value={number}
+                onWheel={(e) => e.currentTarget.blur()}
                 onChange={(e) => {
                   setData({ ...data, number: e.target.value });
                 }}
@@ -198,8 +199,8 @@ export default function Contact() {
               />
             </div>
           </div>
-          <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
-            <div className="flex h-6 items-center">
+          <Field as="div" className="flex gap-x-4 sm:col-span-2">
+            <div className="flex items-center h-6">
               <Switch
                 checked={agreed}
                 onChange={setAgreed}
@@ -218,14 +219,14 @@ export default function Contact() {
                 />
               </Switch>
             </div>
-            <Switch.Label className="text-sm leading-6 text-gray-600">
+            <Label className="text-sm leading-6 text-gray-600">
               By selecting this, you agree to our{" "}
               <a href="/privacy" className="font-semibold text-indigo-600">
                 privacy&nbsp;policy
               </a>
               .
-            </Switch.Label>
-          </Switch.Group>
+            </Label>
+          </Field>
         </div>
         <div className="mt-10">
           <button

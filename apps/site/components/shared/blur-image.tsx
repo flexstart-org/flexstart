@@ -16,7 +16,7 @@ export default function BlurImage(props: ImageProps) {
       className={`${props.className} ${
         loading ? "blur-sm grayscale" : "blur-0 grayscale-0"
       }`}
-      onLoadingComplete={async () => {
+      onLoad={async () => {
         setLoading(false);
       }}
       onError={() => {

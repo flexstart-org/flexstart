@@ -1,0 +1,10 @@
+export default {
+  "*": {
+    "type": "page",
+    "display": "hidden"
+  },
+  index: "Overview",
+  nextjs: "Next.js",
+  javascript: "JavaScript",
+  bca: "BCA"
+}
