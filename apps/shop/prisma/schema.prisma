@@ -5,9 +5,15 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  output          = "../../../node_modules/@prisma/client/shop"
-  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+model User {
+  id       String @id @default(uuid()) @map("_id")
+  name     String
+  email    String @unique
+  password String
 }
 
 model Product {
@@ -27,6 +33,23 @@ model Product {
   updatedAt        DateTime         @updatedAt
 }
 
+model Cart {
+  id            String     @id @default(uuid()) @map("_id")
+  checkoutUrl   String
+  cost          Cost
+  lines         CartItem[]
+  totalQuantity Int        @default(0)
+}
+
+model Payments {
+  id          String   @id @default(uuid()) @map("_id")
+  cartId      String
+  amount      Money
+  status      String
+  paymentDate DateTime
+}
+
+// type declarations for type-safety only
 type Products {
   id               String
   handle           String
@@ -42,14 +65,6 @@ type Products {
   seo              SEO
   tags             String[]
   updatedAt        DateTime
-}
-
-model Cart {
-  id            String     @id @default(uuid()) @map("_id")
-  checkoutUrl   String
-  cost          Cost
-  lines         CartItem[]
-  totalQuantity Int        @default(0)
 }
 
 type Cost {
