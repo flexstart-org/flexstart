@@ -31,7 +31,7 @@ export const blog = [
 
 <Cards num={2}>
   {blog.map((item) => (
-    <Cards.Card image arrow title={item.title} href={item.href}>
+    <Cards.Card key={item.href} arrow title={item.title} href={item.href}>
       <img src={item.image} className="h-56 object-cover" />
     </Cards.Card>
   ))}

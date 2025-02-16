@@ -194,7 +194,7 @@ export default function Contact() {
                 }}
                 rows={4}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                defaultValue={""}
+                // defaultValue={""}
                 required
               />
             </div>
@@ -206,7 +206,7 @@ export default function Contact() {
                 onChange={setAgreed}
                 className={classNames(
                   agreed ? "bg-indigo-600" : "bg-gray-200",
-                  "flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  "flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 )}
               >
                 <span className="sr-only">Agree to policies</span>
@@ -236,7 +236,7 @@ export default function Contact() {
               saving
                 ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
                 : "bg-indigo-600 text-white hover:bg-indigo-500"
-            } block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+            } block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
           >
             {saving ? <LoadingDots color="#808080" /> : "Submit"}
           </button>

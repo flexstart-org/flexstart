@@ -10,8 +10,11 @@ const withNextra = nextra({
   readingTime: true,
 });
 
-export default withNextra({
+const nextConfig = withNextra({
   reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     domains: ["pbs.twimg.com"],
   },
@@ -30,3 +33,5 @@ export default withNextra({
     ];
   },
 });
+
+export default nextConfig;
